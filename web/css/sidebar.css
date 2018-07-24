@@ -1,0 +1,166 @@
+/* ---------------------------------------------------
+    SIDEBAR
+----------------------------------------------------- */
+#sidebar-wrapper {
+    position: absolute;
+    z-index: 1;
+    opacity: .8;
+    width: 380px;
+    left: 0;
+}
+
+#sidebar-wrapper:hover {
+    opacity: 1
+}
+
+#sidebar {
+    background: #31414E;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar div.sidebar-header {
+    padding: 10px;
+    background: #f0a816;
+}
+
+#sidebar div.sidebar-header h5{
+    margin: 0
+}
+
+#sidebar div.sidebar-header i {
+    cursor: pointer;
+    width: 25px;
+    padding: 5px 0px 0 6px;
+    height: 25px;
+    border-radius: 50%;
+    float: right;
+}
+
+#sidebar-wrapper.hidden div.sidebar-header i {
+    position: absolute;
+    color: red;
+    background: white;
+    left: 405px;
+    z-index: 1
+}
+
+#sidebar ul#layers{
+    position: relative;
+    height: 60vh;
+    overflow-x: hidden
+}
+
+#sidebar li{
+    position: relative;
+    width: 100%;
+    cursor: default;
+    transition: ease .2s all;
+}
+
+#sidebar ul#layers li a {
+    padding: 5px 10px 10px;
+    font-size: 1em;
+    display: block;
+    color: #fff;
+    transition: ease .2s all;
+}
+
+#sidebar ul#layers li.hovered{
+    background: #7e7e9e
+}
+
+#sidebar ul#layers li.hovered > a {
+    font-size: 16px;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+#sidebar i.tree-checkbox {
+    margin-right: 3px;
+    top: 1px;
+    position: relative;
+    cursor: pointer;
+    width: 12px
+}
+
+#sidebar span.unselectable {
+    /*cursor: move;*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#sidebar span.unselectable i.fa-arrow-up{
+    cursor: pointer;
+    font-size: 12px
+}
+
+#sidebar i.fa-chevron-left {
+    float: right;
+    font-size: 12px;
+    transition: all ease .3s;
+    transform: rotateZ(-450deg);
+    cursor: pointer
+}
+
+#sidebar div.legend{
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    top: 5px;
+    position: relative;
+    border-radius: 50%;
+}
+
+/*BARRA DE OPACIDAD*/
+#sidebar input.opacity-bar{
+    display: none
+}
+
+#sidebar a.leaf:hover input.opacity-bar{
+    display: block
+}
+
+/*#sidebar div.opacity-bar-container{
+    transition: ease .3s all;
+    position: relative;
+    margin-top: 5px;
+    display: none;
+}
+
+#sidebar a.leaf:hover div.opacity-bar-container{
+    display: block
+}
+
+#sidebar div.opacity-bar{
+    height: 7px;
+    opacity: 1;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+#sidebar div.opacity-bar-knob {
+    position: absolute;
+    top: -5px;
+    left: calc(100% - 8px);
+    width: 17px;
+    height: 17px;
+    background: white;
+    border-radius: 50%;
+}*/
+/*BARRA DE OPACIDAD - FIN*/
+
+/*AÑO ASCENSO NMM*/
+#ascenso_nmm_year {
+    display: none;
+    width: 30%;
+    min-width: 65px;
+    height: 25px;
+}
+/*AÑO ASCENSO NMM - FIN*/

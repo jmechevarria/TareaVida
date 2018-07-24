@@ -1,0 +1,89 @@
+    /**
+{% block phpdoc_method_header %}
+     * Creates a new {{ entity }} entity.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/", name="{{ route_name_prefix }}_create")
+     * @Method("POST")
+     * @Template("{{ bundle }}:{{ entity }}:new.html.twig")
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function createAction(Request $request) {
+{% endblock method_definition %}
+{% block method_body %}
+        $entity = new {{ entity_class }}();
+        $form = $this->createCreateForm($entity);
+        $form->submit($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            {% if 'show' in actions -%}
+                return $this->redirect($this->generateUrl('{{ route_name_prefix }}_show', array('id' => $entity->getId())));
+            {%- else -%}
+                return $this->redirect($this->generateUrl('{{ route_name_prefix }}'));
+            {%- endif %}
+
+        }
+
+        $errors = array();
+        foreach ($form as $field) {
+            if ($field->getConfig()->getType()->getName() != 'repeated') {
+                if ($field->getErrors()) {
+                    $name = $field->getName();
+                    $errors [$name] = $field->getErrors();
+                    $errors[$name] = $errors[$name][0]->getMessage();
+                }
+            } else {
+                $grandchildren = $field->all();
+                foreach ($grandchildren as $g) {
+                    if ($g->getErrors()) {
+                        $name = $field->getName() . '_' . $g->getName();
+                        $errors [$name] = $g->getErrors();
+                        $errors[$name] = $errors[$name][0]->getMessage();
+                    }
+                }
+            }
+        }
+{% endblock method_body %}
+
+{% block method_return %}
+{% if 'annotation' == format %}
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'errors' => $errors
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'errors' => $errors
+        ));
+{% endif %}
+{% endblock method_return %}
+    }
+
+{% block form %}
+    /**
+    * Creates a form to create a {{ entity }} entity.
+    *
+    * @param {{ entity_class }} $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createCreateForm({{ entity_class }} $entity) {
+        $form = $this->createForm(new {{ entity_class }}Type(), $entity, array(
+            'action' => $this->generateUrl('{{ route_name_prefix }}_create'),
+            'method' => 'POST',
+        ));
+
+        return $form;
+    }
+{% endblock form %}

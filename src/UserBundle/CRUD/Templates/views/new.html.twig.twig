@@ -1,0 +1,32 @@
+{% block extends %}
+{{ "{% extends '" ~ bundle ~ ":" ~ entity ~ ":layout.html.twig' %}" }}
+{% endblock extends %}
+
+{{ "{% block title %}{{parent()}} |" }} Crear {{ entity }}{{"{% endblock title %}"}}
+
+{% block body %}
+{{ "{% block body -%}" }}
+    <FORM class="form-horizontal" action="{{ "{{path('" ~ route_name_prefix ~ "_create')}}" }}"
+          method="post" {{ "{{ form_enctype(form) }}" }} name="{{"{{form.vars.name}}"}}">
+        <center><h3>Crear {{entity}}</h3></center>
+
+        {{ "{{ form_widget(form) }}" }}
+        <DIV class="form-actions">
+            <BUTTON name="submit" type="submit"
+                    class="btn btn-primary"><I class="fa-check"></I>
+                {{ "{{ 'Guardar'|trans }}" }}</BUTTON>
+            <a class="btn" href="{{ "{{ path('" ~ route_name_prefix ~ "') }}" }}">
+                <I class="fa-ban"></I> {{ "{{ 'Cancelar'|trans }}" }}</a>
+        </DIV>
+    </FORM>
+{{ "{% endblock %}" }}
+{% endblock body %}
+
+{{ "{% block javascripts %}" }}
+    {{ "{{parent()}}" }}
+    <script type="text/javascript">
+        {{ "{% if errors is defined %}" }}
+            processErrors({{'"{{errors|json_encode()}}"'}});
+        {{ "{% endif %}" }}
+    </script>
+{{ "{% endblock %}" }}

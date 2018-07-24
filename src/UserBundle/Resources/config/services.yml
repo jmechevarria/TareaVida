@@ -1,0 +1,17 @@
+#parameters:
+#    user.example.class: UserBundle\Example
+
+services:
+#    login_listener:
+#        class: UserBundle\Listener\LoginListener
+#        arguments: [@router]
+#        tags:
+#            - { name: kernel.event_listener, event: security.interactive_login }
+#            - { name: kernel.event_listener, event: kernel.response }
+##
+    logout_listener:
+        class: UserBundle\Listener\LogoutListener
+        arguments: ['@router']
+#        tags:
+#            - { name: kernel.event_listener, event: security.interactive_login }
+#            - { name: kernel.event_listener, event: kernel.response }

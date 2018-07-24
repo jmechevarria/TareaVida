@@ -1,0 +1,92 @@
+#header-nav {
+    min-height: 50px;
+    padding: 0 15px 0 0;
+    background: -moz-linear-gradient(-60deg, #343a40 70%, rgba(50, 138, 156, 0.7) 90%);
+}
+
+#header-nav a.navbar-brand {
+    padding: .3rem 1rem;
+    font-size: 1.7rem;
+    width: 15%;
+}
+
+#header-nav a.navbar-brand:hover {
+    text-shadow: 0 0px 10px lightblue;
+}
+
+#main-nav div.dropdown-menu.show a{
+    color: white;
+}
+
+#main-nav div.dropdown-menu.show a:hover, #main-nav div.dropdown-menu.show a:focus{
+    color: black;
+}
+
+#main-nav div.dropdown-menu {
+    border-top-left-radius: 0;
+    border: none;
+    opacity: .9
+}
+
+#header-nav #navbar-target-collapse ul#main-nav div.dropdown-menu{
+    margin: 0;
+}
+
+#header-nav ul#main-nav div.dropdown.submenu:hover > div.dropdown-menu {
+    display: block;
+}
+
+#main-nav > li > a{
+    font-size: 18px
+}
+
+#header-nav #navbar-target-collapse > ul > li > a{
+    padding: .7rem 1rem;
+    /*height: 100%;*/
+}
+
+#header-nav #navbar-target-collapse > ul > li > a::after{
+    content: unset
+}
+
+#header-nav form.form-inline{
+    margin-right: 20px
+}
+
+#header-nav input.form-control{
+    width: 150px;
+    transition: .3s width;
+}
+
+#header-nav input.form-control:focus{
+    width: 250px;
+}
+
+#header-nav form span i{
+    font-size: 20px;
+    color: rgb(142, 142, 142);
+}
+
+#header-nav #user-menu div.dropdown-menu{
+    right: 0;
+    left: unset
+}
+
+/*para viewports mayores de 576px de ancho*/
+@media(min-width: 576px){
+    #main-nav {
+        padding-left: 150px
+    }
+    #main-nav > li.show,
+    #main-nav > li div.dropdown-menu.show {
+        background: #011d39;
+    }
+}
+
+/*para viewports menores de 576px de ancho*/
+@media(max-width: 576px){
+    #main-nav > li.show,
+    #main-nav > li div.dropdown-menu.show {
+        background: transparent;
+    }
+}

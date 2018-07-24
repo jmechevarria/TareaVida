@@ -1,0 +1,15 @@
+layer_homepage:
+    path:     /
+    defaults: { _controller: LayerBundle:Default:index }
+
+LayerBundle_sueloafectado:
+    resource: "@LayerBundle/Resources/config/routing/sueloafectado.yml"
+    prefix: /suelo_afectado/
+
+LayerBundle_parcelaagricolaafectada:
+    resource: "@LayerBundle/Resources/config/routing/parcelaagricolaafectada.yml"
+    prefix: /parcela_agricola_afectada/
+
+LayerBundle_ascensonmm:
+    resource: "@LayerBundle/Resources/config/routing/ascensonmm.yml"
+    prefix:   /ascenso_nmm/

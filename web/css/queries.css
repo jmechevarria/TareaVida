@@ -1,0 +1,150 @@
+#query{
+    display: none;
+    left: 400px;
+    position: absolute;
+    top: 20px;
+    opacity: .2;
+    border: 1px solid rgb(23, 162, 184);
+}
+
+#query:hover{
+    opacity: 1
+}
+
+#query ul.nav-tabs{
+    margin: 0;
+    border-bottom: none;
+    background: white
+}
+
+#query ul.nav-tabs li.nav-item{
+    margin-bottom: 0
+}
+
+#query ul.nav-tabs a.nav-link{
+    border: none;
+    border-radius: 0;
+    text-align: center;
+    padding: .2rem .8rem
+}
+
+#query div#query-title, #query thead, #query ul.nav-tabs a.nav-link.active{
+    color: white;
+    background-color: #17a2b8;
+    font-weight: bold;
+    text-align: center
+}
+
+#query ul.nav-tabs a:not(.active):hover{
+    background: #e6e9e6;
+}
+
+#query div.tab-content{
+    max-height: 200px;
+    overflow-y: auto;
+    background: white
+}
+
+#query div.tab-content.minimized{
+    max-height: 0;
+}
+
+/*RESUMEN DE AFECTACIONES POR FORMA PRODUCTIVA*/
+#query #tab-content-municipios{
+    overflow-y: hidden;
+}
+
+#query #tab-content-municipios.resumen-activo{
+    max-height: none
+}
+
+#query #tab-content-municipios.resumen-activo.minimized{
+    max-height: 0
+}
+
+#query #resumen-municipio td:first-child{
+    background: #17a2b8;
+    color: white;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+#query #resumen-municipio tr.fila:hover {
+    background: unset;
+}
+
+#query #resumen-municipio th, #query #resumen-municipio td {
+    padding: 5px;
+}
+
+#query #resumen-municipio th,
+#query #resumen-municipio td  {
+    border: 0;
+}
+
+#query #resumen-municipio td.celda:not(.empty):hover {
+    background: rgb(243, 120, 80);
+    color: black;
+}
+
+#query #resumen-municipio td.celda.selected {
+    background: rgb(255,100,50);
+    color: black;
+    transform: scale(.9);
+}
+
+#query #resumen-municipio td.celda.empty {
+    color: #8D8888;
+}
+
+#query #resumen-municipio td.celda div:first-child {
+    text-decoration: underline;
+}
+
+#query #resumen-municipio th.hovered,
+#query #resumen-municipio td.hovered {
+    background: rgb(243, 120, 80);
+}
+/*RESUMEN DE AFECTACIONES POR FORMA PRODUCTIVA - FIN*/
+
+#query table{
+    margin-bottom: 0;
+    width: 100%
+}
+
+#query tbody tr.selected{
+    background: #33ffff;
+    color: black
+}
+
+#query tbody tr:hover:not(.selected) {
+    background: rgb(59, 59, 59);
+    cursor: pointer;
+}
+
+#query th, #query td{
+    text-align: center;
+    padding: 3px;
+    border: none
+}
+
+#query #buttons{
+    position: absolute;
+    right: 0;
+    /*top: -10px*/
+}
+
+#query button.query-button{
+    font-size: 10px;
+    float: right;
+    border: none;
+}
+
+#query button#query-close{
+    background: #db0707;
+    color: white
+}
+
+#query button#query-minimize{
+    background: #48c5c5;
+}

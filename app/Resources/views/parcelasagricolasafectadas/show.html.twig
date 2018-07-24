@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Parcelasagricolasafectada</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Geom</th>
+                <td>{{ parcelasAgricolasAfectada.geom }}</td>
+            </tr>
+            <tr>
+                <th>Fid</th>
+                <td>{{ parcelasAgricolasAfectada.fid }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ parcelasAgricolasAfectada.numero }}</td>
+            </tr>
+            <tr>
+                <th>Division</th>
+                <td>{{ parcelasAgricolasAfectada.division }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ parcelasAgricolasAfectada.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{ parcelasAgricolasAfectada.direccion }}</td>
+            </tr>
+            <tr>
+                <th>Numpostal</th>
+                <td>{{ parcelasAgricolasAfectada.numpostal }}</td>
+            </tr>
+            <tr>
+                <th>Area</th>
+                <td>{{ parcelasAgricolasAfectada.area }}</td>
+            </tr>
+            <tr>
+                <th>Fechacreac</th>
+                <td>{% if parcelasAgricolasAfectada.fechacreac %}{{ parcelasAgricolasAfectada.fechacreac|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechacambi</th>
+                <td>{% if parcelasAgricolasAfectada.fechacambi %}{{ parcelasAgricolasAfectada.fechacambi|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Tipoparc</th>
+                <td>{{ parcelasAgricolasAfectada.tipoparc }}</td>
+            </tr>
+            <tr>
+                <th>Delughab</th>
+                <td>{{ parcelasAgricolasAfectada.delughab }}</td>
+            </tr>
+            <tr>
+                <th>Decayo</th>
+                <td>{{ parcelasAgricolasAfectada.decayo }}</td>
+            </tr>
+            <tr>
+                <th>Tiposup</th>
+                <td>{{ parcelasAgricolasAfectada.tiposup }}</td>
+            </tr>
+            <tr>
+                <th>Tipouso</th>
+                <td>{{ parcelasAgricolasAfectada.tipouso }}</td>
+            </tr>
+            <tr>
+                <th>Espuso</th>
+                <td>{{ parcelasAgricolasAfectada.espuso }}</td>
+            </tr>
+            <tr>
+                <th>Poseedor</th>
+                <td>{{ parcelasAgricolasAfectada.poseedor }}</td>
+            </tr>
+            <tr>
+                <th>Propietari</th>
+                <td>{{ parcelasAgricolasAfectada.propietari }}</td>
+            </tr>
+            <tr>
+                <th>Regimen</th>
+                <td>{{ parcelasAgricolasAfectada.regimen }}</td>
+            </tr>
+            <tr>
+                <th>Nic</th>
+                <td>{{ parcelasAgricolasAfectada.nic }}</td>
+            </tr>
+            <tr>
+                <th>Valcat</th>
+                <td>{{ parcelasAgricolasAfectada.valcat }}</td>
+            </tr>
+            <tr>
+                <th>Municipio</th>
+                <td>{{ parcelasAgricolasAfectada.municipio }}</td>
+            </tr>
+            <tr>
+                <th>Consejopop</th>
+                <td>{{ parcelasAgricolasAfectada.consejopop }}</td>
+            </tr>
+            <tr>
+                <th>Finca</th>
+                <td>{{ parcelasAgricolasAfectada.finca }}</td>
+            </tr>
+            <tr>
+                <th>Riego</th>
+                <td>{{ parcelasAgricolasAfectada.riego }}</td>
+            </tr>
+            <tr>
+                <th>Roturacion</th>
+                <td>{{ parcelasAgricolasAfectada.roturacion }}</td>
+            </tr>
+            <tr>
+                <th>Usufructo</th>
+                <td>{{ parcelasAgricolasAfectada.usufructo }}</td>
+            </tr>
+            <tr>
+                <th>Miprinx</th>
+                <td>{{ parcelasAgricolasAfectada.miPrinx }}</td>
+            </tr>
+            <tr>
+                <th>Municipionombre</th>
+                <td>{{ parcelasAgricolasAfectada.municipioNombre }}</td>
+            </tr>
+            <tr>
+                <th>Gid</th>
+                <td>{{ parcelasAgricolasAfectada.gid }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ParcelaAgricolaAfectada_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('ParcelaAgricolaAfectada_edit', { 'gid': parcelasAgricolasAfectada.gid }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

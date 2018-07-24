@@ -1,0 +1,63 @@
+#filters-row select,
+#filters-row input,
+#filters-row th > *{
+    width: 100%
+}
+
+#options .row{
+    background: lightgray;
+    padding: 2px
+}
+
+#options .row div{
+    border-right: 1px solid black;
+    padding: 0;
+    background: white;
+    cursor: pointer
+}
+
+#options .row div:hover{
+    opacity: .6
+}
+
+#options .row div:active{
+    opacity: .3
+}
+
+#options .row div:first-child{
+    color: red
+}
+
+#options .row div:nth-child(2){
+    color: blue
+}
+
+#rows-shown{
+    color: lightgreen;
+    /*background: white;*/
+}
+
+/*.to-date-filter-input,
+.date-filter-input {
+    border-right: red solid 3px;
+}
+
+.from-date-filter-input,
+.date-filter-input{
+    border-left: red solid 3px;
+}
+
+button[id^="update"]{
+    width: 101%;
+    padding: 0px;
+}
+
+.picker__select--month{
+    margin: 0;
+    height: 25px
+}
+
+.picker__select--year{
+    margin: 0 30px 0 0;
+    height: 25px
+}*/

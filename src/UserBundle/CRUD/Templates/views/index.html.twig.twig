@@ -1,0 +1,92 @@
+{% block extends %}
+{{ "{% extends '" ~ bundle ~ ":" ~ entity ~ ":layout.html.twig' %}" }}
+{% endblock extends %}
+
+{{"{% block title %} {{ parent() }} | "  ~ entity ~ " {% endblock %}"}}
+
+{% block body %}
+{{ "{% block body -%}" }}
+    <TABLE class="table table-bordered {{ "{% if entities %} " }}table-filtered{{" {% endif %}"}}">
+        <thead>
+            <TR class="table-title">
+                <TH>{{entity}}</TH>
+            </TR>
+            {{"{% if entities %}"}}
+                <tr class="before-filters">
+                {%- for field, metadata in fields %}
+{% if field|capitalize != 'Id' %}<th>{{ field|capitalize }}</th>
+                    {% else %}
+
+                    {{"{% if is_granted('ROLE_SUPER_ADMIN') %}"}}
+                        <th>{{ field|capitalize }}</th>
+                    {{"{% endif %}"}}
+                    {% endif %}
+                {%- endfor %}
+<th class="no-filter" colspan="3">Opciones</th>
+                </tr>
+            {{"{% endif %}"}}
+        </thead>
+        <tbody>
+            {{ '{% for entity in entities %}' }}
+                <tr>
+
+            {%- for field, metadata in fields %}
+                {%- if loop.first and ('show' in actions) %}
+
+                    {{"{% if is_granted('ROLE_SUPER_ADMIN') %}"}}
+                        <td><a href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { 'id': entity.id }) }}" }}">{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</a></td>
+                    {{"{% endif %}"}}
+
+                {%- elseif metadata.type in ['date', 'datetime'] %}
+
+                    {% set time = metadata.type == 'date' ? '' : ' H:i:s' %}
+
+                    <td>{{"{{ entity." ~ field|replace({'_' : ''}) ~ " != null ? entity." ~
+                     field|replace({'_' : ''}) ~ "|date(\'Y-m-d'" ~ time ~ ") : '-' }}"}}</td>
+                    {#{{ "{% if entity." ~ field|replace({'_': ''}) ~ " %}" }}
+                        <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d' ~ time ~ '\') }}' }}</td>
+                    {{ "{%else%}" }}
+                        <td>-</td>
+                    {{ "{% endif %}" }}
+                    #}
+                {%- else %}
+
+                    <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
+
+                {%- endif %}
+
+                {%- if loop.last %}
+
+
+                    <TD class="option">
+                        <A class="btn" href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { 'id' : entity.id }) }}" }}">
+                            <I class="fa-list green"></I></A>
+                    </TD>
+                    <TD class="option">
+                        <A class="btn" href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id' : entity.id }) }}" }}">
+                            <I class="fa-pencil-square-o blue"></I></A>
+                    </TD>
+                    <TD class="option">
+                        <A class="btn"
+                           {{ "href=\"#" ~ route_name_prefix ~ "_delete" }}{{"{{entity.id}}"}}"
+                           data-toggle="modal">
+                            <I class="fa-trash red"></I></A>
+                                {{"{% include 'modals/modal_delete_" ~ route_name_prefix ~ ".html.twig' %}"}}
+                    </TD>
+                {%- endif %}
+            {%- endfor %}
+
+                </tr>
+            {{ '{% endfor %}' }}
+            <TR class="add_new" filter="false">
+                <td>
+                    <a href="{{"{{ path('" ~ route_name_prefix ~ "_new') }}"}}"><img src="{{"{{ asset('bundles/design/images/add.png') }}"}}"
+                                                               alt="Adicionar {{entity}}"
+                                                               title="Adicionar {{entity}}">
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{{ "{% endblock %}" }}
+{% endblock body %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ascensonmms list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Geom</th>
+                <th>Municipio</th>
+                <th>Area</th>
+                <th>Distanciaascenso</th>
+                <th>Yearascenso</th>
+                <th>Gid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ascensoNMM in ascensoNMMs %}
+            <tr>
+                <td><a href="{{ path('layer_ascensonmm_show', { 'gid': ascensoNMM.gid }) }}">{{ ascensoNMM.geom }}</a></td>
+                <td>{{ ascensoNMM.municipio }}</td>
+                <td>{{ ascensoNMM.area }}</td>
+                <td>{{ ascensoNMM.distanciaAscenso }}</td>
+                <td>{{ ascensoNMM.yearAscenso }}</td>
+                <td>{{ ascensoNMM.gid }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('layer_ascensonmm_show', { 'gid': ascensoNMM.gid }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('layer_ascensonmm_edit', { 'gid': ascensoNMM.gid }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('layer_ascensonmm_new') }}">Create a new ascensoNMM</a>
+        </li>
+    </ul>
+{% endblock %}

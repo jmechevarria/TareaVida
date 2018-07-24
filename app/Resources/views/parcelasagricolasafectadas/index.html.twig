@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ParcelaAgricolaAfectada list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Geom</th>
+                <th>Fid</th>
+                <th>Numero</th>
+                <th>Division</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Numpostal</th>
+                <th>Area</th>
+                <th>Fechacreac</th>
+                <th>Fechacambi</th>
+                <th>Tipoparc</th>
+                <th>Delughab</th>
+                <th>Decayo</th>
+                <th>Tiposup</th>
+                <th>Tipouso</th>
+                <th>Espuso</th>
+                <th>Poseedor</th>
+                <th>Propietari</th>
+                <th>Regimen</th>
+                <th>Nic</th>
+                <th>Valcat</th>
+                <th>Municipio</th>
+                <th>Consejopop</th>
+                <th>Finca</th>
+                <th>Riego</th>
+                <th>Roturacion</th>
+                <th>Usufructo</th>
+                <th>Miprinx</th>
+                <th>Municipionombre</th>
+                <th>Gid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for parcelasAgricolasAfectada in ParcelaAgricolaAfectada %}
+            <tr>
+                <td><a href="{{ path('ParcelaAgricolaAfectada_show', { 'gid': parcelasAgricolasAfectada.gid }) }}">{{ parcelasAgricolasAfectada.geom }}</a></td>
+                <td>{{ parcelasAgricolasAfectada.fid }}</td>
+                <td>{{ parcelasAgricolasAfectada.numero }}</td>
+                <td>{{ parcelasAgricolasAfectada.division }}</td>
+                <td>{{ parcelasAgricolasAfectada.nombre }}</td>
+                <td>{{ parcelasAgricolasAfectada.direccion }}</td>
+                <td>{{ parcelasAgricolasAfectada.numpostal }}</td>
+                <td>{{ parcelasAgricolasAfectada.area }}</td>
+                <td>{% if parcelasAgricolasAfectada.fechacreac %}{{ parcelasAgricolasAfectada.fechacreac|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if parcelasAgricolasAfectada.fechacambi %}{{ parcelasAgricolasAfectada.fechacambi|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ parcelasAgricolasAfectada.tipoparc }}</td>
+                <td>{{ parcelasAgricolasAfectada.delughab }}</td>
+                <td>{{ parcelasAgricolasAfectada.decayo }}</td>
+                <td>{{ parcelasAgricolasAfectada.tiposup }}</td>
+                <td>{{ parcelasAgricolasAfectada.tipouso }}</td>
+                <td>{{ parcelasAgricolasAfectada.espuso }}</td>
+                <td>{{ parcelasAgricolasAfectada.poseedor }}</td>
+                <td>{{ parcelasAgricolasAfectada.propietari }}</td>
+                <td>{{ parcelasAgricolasAfectada.regimen }}</td>
+                <td>{{ parcelasAgricolasAfectada.nic }}</td>
+                <td>{{ parcelasAgricolasAfectada.valcat }}</td>
+                <td>{{ parcelasAgricolasAfectada.municipio }}</td>
+                <td>{{ parcelasAgricolasAfectada.consejopop }}</td>
+                <td>{{ parcelasAgricolasAfectada.finca }}</td>
+                <td>{{ parcelasAgricolasAfectada.riego }}</td>
+                <td>{{ parcelasAgricolasAfectada.roturacion }}</td>
+                <td>{{ parcelasAgricolasAfectada.usufructo }}</td>
+                <td>{{ parcelasAgricolasAfectada.miPrinx }}</td>
+                <td>{{ parcelasAgricolasAfectada.municipioNombre }}</td>
+                <td>{{ parcelasAgricolasAfectada.gid }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ParcelaAgricolaAfectada_show', { 'gid': parcelasAgricolasAfectada.gid }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ParcelaAgricolaAfectada_edit', { 'gid': parcelasAgricolasAfectada.gid }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ParcelaAgricolaAfectada_new') }}">Create a new parcelasAgricolasAfectada</a>
+        </li>
+    </ul>
+{% endblock %}

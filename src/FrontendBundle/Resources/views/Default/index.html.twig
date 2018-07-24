@@ -1,0 +1,123 @@
+{% extends "base.html.twig" %}
+{#{% block header %}
+    
+{% endblock header %}#}
+
+{% block sidebar %}
+    <div id="sidebar-wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa fa-close"></i>
+                <h5>Selector de capas</h5>
+            </div>
+            <ul id="layers" class="list-unstyled">
+            </ul>
+        </nav>
+    </div>       
+{% endblock sidebar %}
+
+{% block map %}
+    <div id="map-wrapper">
+        <div id="map">
+
+        </div>
+    </div>
+    <div id="interactions-wrapper">
+        <div id="interactions" class="unlocked">
+            <span id="lock"><i class="fa fa-unlock-alt"></i></span>
+            <div id="measurements">
+                <span id="length"><i class="fa fa-ruler"></i></span>
+                <span id="area"><i class="fa fa-area-chart"></i></span>
+            </div>
+            <div id="selection">
+                {#<span id="Point"><i class="fa fa-ruler"></i></span>
+                <span id="LineString"><i class="fa fa-user"></i></span>#}
+                <span id="Polygon"><i class="fa fa-chart-area"></i></span>
+                    {#            <span id="Circle"><i class="fa fa-user"></i></span>#}
+                    {#                    <span id="None"><i class="fa fa-user"></i></span>#}
+            </div>
+            <div id="popup">
+                <span id="coordinate"><i class="fa fa-map-marker"></i></span>
+            </div>
+        </div>
+    </div>
+{% endblock map %}
+
+{% block queries %}
+    <div id="query">
+        {#<table class="table table-bordered table-hover">
+            <thead></thead>
+            <tbody></tbody>
+        </table>#}
+{#        <div id="query-placeholder"></div>#}
+        <div id="buttons">
+            <button id="query-close" class="query-button"><i class="fa fa-window-close-o"></i></button>
+            <button id="query-minimize" class="query-button"><i class="fa fa-window-minimize"></i></button>
+        </div>
+        <div id="query-title"></div>
+    </div>
+{% endblock queries %}
+
+{% block legend %}
+    <div id="legend">
+        <div class="card suelo_afectado">
+            {#<div class="card-header">
+                Categor&iacute;as agroproductivas <i class="fa fa-chevron-down"></i>
+            </div>#}
+            <ul class="list-group list-group-flush">
+                <li id="I" class="list-group-item">Categor&iacute;a I</li>
+                <li id="II" class="list-group-item">Categor&iacute;a II</li>
+                <li id="III" class="list-group-item">Categor&iacute;a III</li>
+                <li id="IV" class="list-group-item">Categor&iacute;a IV</li>
+            </ul>
+        </div>
+    </div>
+    {#<div id="legend">
+        <div class="suelo_afectado">
+            <span id="c1">Categor&iacute;a I</span>
+            <span id="c2">Categor&iacute;a II</span>
+            <span id="c3">Categor&iacute;a III</span>
+            <span id="c4">Categor&iacute;a IV</span>
+        </div>
+    </div>#}
+{% endblock legend %}
+
+{% block popups %}
+    <div id="coordinates-popup" class="ol-popup">
+        <a href="#" id="coordinates-popup-closer" class="ol-popup-closer"></a>
+        <div id="coordinates-popup-content"></div>
+    </div>
+    <div id="feature-info-popup" class="ol-popup">
+        <a href="#" id="feature-info-popup-closer" class="ol-popup-closer"></a>
+        <div id="feature-info-popup-content"></div>
+    </div>
+    <span id="test2"></span>
+
+{% endblock popups %}
+
+{% block info_panel %}
+    <div id="info-panel" {#class="resizable"#}>
+        <div id="handle" style="{#position: absolute#}" {#class="ui-resizable-handle ui-resizable-n"#}></div>
+        <div class="tabbable">
+            <ul class="nav nav-responsive nav-tabs"></ul>
+            <div class="tab-content"></div>
+        </div>
+    </div>
+{% endblock info_panel %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset ('css/info-panel.css') }}"/>
+    
+    {{parent()}}
+{% endblock stylesheets %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script type="text/javascript" src="{{ asset('bundles/frontend/js/proj4js-2.4.3/dist/proj4.js') }}" ></script>
+    
+    <script type="text/javascript" src="{{ asset('js/map.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('js/mapfunctions.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('js/interactions.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('js/queries.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('js/legend.js') }}" ></script>
+{% endblock javascripts %}

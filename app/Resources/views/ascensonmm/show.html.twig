@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ascensonmm</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Geom</th>
+                <td>{{ ascensoNMM.geom }}</td>
+            </tr>
+            <tr>
+                <th>Municipio</th>
+                <td>{{ ascensoNMM.municipio }}</td>
+            </tr>
+            <tr>
+                <th>Area</th>
+                <td>{{ ascensoNMM.area }}</td>
+            </tr>
+            <tr>
+                <th>Distanciaascenso</th>
+                <td>{{ ascensoNMM.distanciaAscenso }}</td>
+            </tr>
+            <tr>
+                <th>Yearascenso</th>
+                <td>{{ ascensoNMM.yearAscenso }}</td>
+            </tr>
+            <tr>
+                <th>Gid</th>
+                <td>{{ ascensoNMM.gid }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('layer_ascensonmm_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('layer_ascensonmm_edit', { 'gid': ascensoNMM.gid }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,34 @@
+<?php
+
+namespace LayerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Test2
+ *
+ * @ORM\Table(name="test2")
+ * @ORM\Entity
+ */
+class Test2
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="k1", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $k1;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="k2", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $k2;
+
+
+}

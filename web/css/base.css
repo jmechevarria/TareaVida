@@ -1,0 +1,21 @@
+body{
+    overflow: hidden
+}
+
+#main-container {
+    position: relative;
+    height: calc(100vh - 50px);
+    top: 50px;
+}
+
+a:active, a:focus{
+    outline: none
+}
+
+.ol-zoom, .ol-scale-line, .ol-zoomslider, .ol-zoom-extent{
+    left: 2em
+}
+
+input[type="range"]{
+    cursor: pointer
+}

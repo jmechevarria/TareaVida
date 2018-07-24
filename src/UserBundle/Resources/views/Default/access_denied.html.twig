@@ -1,0 +1,16 @@
+{% extends 'UserBundle::layout.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset ('css/userbundle/access_denied.css') }}"/>
+{% endblock %}
+{% block title %}Acceso denegado{% endblock %}
+{% block body %}
+    <div class="row-fluid alert-danger">
+        <i class="fa-ban-circle"></i> {{ msg }}
+        <br>
+        <a href="{{ path('user_login')}}"><i class="fa-angle-double-left"></i> Inicio</a>
+    </div>
+{% endblock %}
+{% block aside %}{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset ('js/userbundle/access_denied.js') }}" ></script>
+{% endblock %}

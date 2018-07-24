@@ -1,0 +1,137 @@
+{% extends 'forms.html.twig' %}
+
+{% form_theme form _self %}
+{% set user_is_defined  = user is defined %}
+    {% set user_theme = user_is_defined ? user.theme : form.vars.value.theme %}
+        {% block title %}{{user_is_defined ? user.username : 'Sign up'}}{% endblock %}
+        {% block content %}
+            {% set signup_type = app.request.attributes.all._route == 'user_signup' ? app.request.attributes.all._route_params.signup_type : ''%}
+            <form id="profile-form" class='form' action="{{ path(user_is_defined ? 'user_profile' : 'user_signup',
+                                    {'signup_type' : signup_type}) }}" method="post" {{ form_enctype(form) }}
+                  name="{{form.vars.name}}">
+                <div class="form-section">
+                    <label class="form-header"><i class='fa fa-cog fa-spin'></i> Account info</label>
+                    <div class="row">
+                        <div class="col-3">
+                            {{form_widget(form.image)}}
+                        </div>
+                        <div class="col-9">
+                            {{form_row(form.username)}}
+                            {{form_row(form.email)}}
+                            {{form_row(form.password)}}
+                            {{form_row(form.theme)}}
+                            <input id="theme" type="hidden" name="{{form.vars.name ~ '[theme]'}}" value="{{user_theme}}"/>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class='form-section'>
+                    <label class="form-header"><i class='fa fa-user'></i> Personal info</label>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-9">
+                            {{form_row(form.name)}}
+                            {{form_row(form.lastname)}}
+                        </div>
+                    </div>
+                </div>
+                {{form_rest(form)}}
+
+                <div class='form-actions'>
+                    <BUTTON class="btn btn-primary" name="submit" type="submit"><I class="fa fa-save"></I>
+                        {{'Save' | trans}}</BUTTON>
+                    <a class="btn" href="{{ path('homepage') }}"><I class="fa fa-ban"></I> {{'Discard'|trans}}</a>
+                </div>
+            </form>
+        {% endblock %}
+
+        {% block _mmcoh_userbundle_user_theme_widget %}
+            <div id="theme-container">
+                <img id="generic" src="{{asset('images/themes/generic.png')}}" title="Generic"/>
+                <img id="sylvan" src="{{asset('images/themes/sylvan.png')}}" title="Sylvan"/>
+                <img id="haven" src="{{asset('images/themes/haven.png')}}" title="Haven"/>
+                <img id="necro" src="{{asset('images/themes/necro.png')}}" title="Necro"/>
+                <img id="inferno" src="{{asset('images/themes/inferno.png')}}" title="Inferno"/>
+                <img id="academy" src="{{asset('images/themes/academy.png')}}" title="Academy"/>
+            </div>
+        {% endblock %}
+
+        {% block javascripts %}
+            {{parent()}}
+            <script type="text/javascript">
+                $('#' + '{{user_theme}}').addClass('active');
+                var theme_container = $('#theme-container');
+                theme_container.children().each(function(i) {
+                    $(this).click(function() {
+                        var new_theme = $(this).attr('id');
+                        $(this).siblings().removeClass('active');
+                        $(this).addClass('active');
+                        $('#theme').val(new_theme);
+                        var linkTag = $('#theme-css');
+                        if(linkTag[0] === undefined){
+                            $('head').append('<link rel="stylesheet" id="theme-css" href="' + __base + 'css/themes/' + new_theme + '.css' + '"/>');
+                        } else{
+                            $('#theme-css').attr('href', $('#theme-css').attr('href').replace(/(\/.+)\/.+(.css)$/, '$1/' + new_theme + '$2'));
+                        }
+                    });
+                });
+            </script>
+        {% endblock javascripts %}
+
+        {% block stylesheets %}
+            {{parent()}}
+            <style type="text/css">
+                ul#user-info img{
+                    display: none /*TO PREVENT CONFLICT BETWEEN THE PICTURE IN THE FORM AND THE OLD PICTURE IN THE MENU*/
+                }
+
+                #theme-container {
+                    position: relative;
+                    height: 60px;
+                    left: 10%;
+                    top: 10%
+                }
+
+                #theme-container img{
+                    height: 70%;
+                    transform: scale(1);
+                    border-radius: 50%;
+                    opacity: .5;
+                    margin-left: 6%
+                }
+
+                #theme-container img:not(.active):hover{
+                    opacity: .8;
+                    transform: scale(1.5)
+                }
+
+                #theme-container img.active{
+                    transform: scale(1.5);
+                    opacity: 1;
+                }
+
+                img#generic{
+                    box-shadow: 0 0 10px darkblue;
+                }
+
+                img#sylvan{
+                    box-shadow: 0 0 10px lightgreen;
+                }
+
+                img#haven{
+                    box-shadow: 0 0 10px lightblue;
+                }
+
+                img#necro{
+                    box-shadow: 0 0 10px purple;
+                }
+
+                img#inferno{
+                    box-shadow: 0 0 10px maroon;
+                }
+
+                img#academy{
+                    box-shadow: 0 0 10px yellow;
+                }
+            </style>
+        {% endblock %}

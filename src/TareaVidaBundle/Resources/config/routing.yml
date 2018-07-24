@@ -1,0 +1,15 @@
+tareavida_homepage:
+    path:     /
+    defaults: { _controller: TareaVidaBundle:Default:index }
+
+get_layers_metadata:
+    path:     /get_layers_metadata/
+    defaults: { _controller: TareaVidaBundle:Default:getLayersMetadata }
+
+tareavida_layer:
+    resource: "@TareaVidaBundle/Resources/config/routing/layer.yml"
+    prefix:   /layer
+
+tareavida_group:
+    resource: "@TareaVidaBundle/Resources/config/routing/group.yml"
+    prefix:   /group

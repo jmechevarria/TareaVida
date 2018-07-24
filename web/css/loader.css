@@ -1,0 +1,106 @@
+body{
+    overflow: hidden
+}
+
+#body-overlay{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: url(../images/bg-site.jpg);
+    z-index: 1000000
+}
+
+#body-overlay div.container{
+    text-align: center;
+    position: relative;
+    height: 100%;
+}
+
+#body-overlay main {
+    position: relative;
+    height: 70%;
+    padding-top: 80px;
+}
+
+#body-overlay footer{
+    position: relative;
+    height: 10%;
+}
+
+#body-overlay div.jumbotron {
+    margin-top: 5px;
+    padding: 1rem;
+    /*background: transparent linear-gradient(137deg, rgba(27, 85, 180, 0.8) 85%, transparent) repeat scroll 0% 0%;*/
+    background: transparent;
+    color: white;
+}
+
+#body-overlay #images{
+    margin-bottom: 10px
+}
+
+#body-overlay #images img{
+    display: inline-block;
+    width: 100px;
+}
+
+#body-overlay div.jumbotron span{
+    font-size: 15px
+}
+
+#body-overlay footer{
+    height: 10%
+}
+
+#body-overlay footer p, #body-overlay footer p img{
+    height: 100%
+}
+
+/*#body-overlay #carouselExampleIndicators img{
+    height: 300px
+}*/
+
+#loader-container {
+    position: relative;
+    width: 10%;
+    left: calc(50% - 5%);
+}
+
+#loader-container:before{ /*TO MAKE IT AS HIGH AS WIDE*/
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+#loader-container div{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    border-radius: 50%
+}
+
+#loader-container #nw{
+    left: 0;
+    top: 0;
+    background: red
+}
+
+#loader-container #ne{
+    left: 50%;
+    top: 0;
+    background: green
+}
+
+#loader-container #se{
+    top: 50%;
+    left: 50%;
+    background: blue
+}
+
+#loader-container #sw{
+    top: 50%;
+    left: 0;
+    background: orange
+}

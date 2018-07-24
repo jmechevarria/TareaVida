@@ -1,0 +1,30 @@
+role:
+    path:  /
+    defaults: { _controller: "UserBundle:Role:index" }
+
+role_show:
+    path:  /{id}/show/
+    defaults: { _controller: "UserBundle:Role:show" }
+
+role_new:
+    path:  /new/
+    defaults: { _controller: "UserBundle:Role:new" }
+
+role_create:
+    path:  /create/
+    defaults: { _controller: "UserBundle:Role:create" }
+    requirements: { methods: post }
+
+role_edit:
+    path:  /{id}/edit/
+    defaults: { _controller: "UserBundle:Role:edit" }
+
+role_update:
+    path:  /{id}/update/
+    defaults: { _controller: "UserBundle:Role:update" }
+    requirements: { methods: post|put }
+
+role_delete:
+    path:  /{id}/delete/
+    defaults: { _controller: "UserBundle:Role:delete" }
+    requirements: { methods: post|delete|get }

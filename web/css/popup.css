@@ -1,0 +1,141 @@
+.ol-popup {
+    position: absolute;
+    background-color: white;
+    -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+    padding: 20px 15px 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    bottom: 12px;
+    left: -50px;
+    min-width: 280px;
+}
+
+.ol-popup:after, .ol-popup:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.ol-popup:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 48px;
+    margin-left: -10px;
+}
+
+.ol-popup:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 48px;
+    margin-left: -11px;
+}
+
+.ol-popup-closer {
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+}
+
+.ol-popup-closer:after {
+    content: "✖";
+}
+
+.ol-popup-closer:hover {
+    text-decoration: none;
+    text-decoration: none;
+}
+
+#feature-info-popup{
+    background: rgba(0, 0, 0, .85);
+    color: white
+}
+
+#feature-info-popup::after{
+    border-top-color: rgba(0, 0, 0, .85);
+}
+
+#feature-info-popup-content{
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: -ms-max-content;
+    width: -o-max-content;
+    width: max-content;
+    max-width: 450px;
+}
+
+/*GRÁFICA DE COLORES DE TIPOS DE SUELO*/
+#feature-info-popup-content #porcientos-tipo-suelo{
+    position: relative;
+}
+
+#feature-info-popup-content #porcientos-tipo-suelo div.category-percent-colorbar {
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default
+}
+
+#feature-info-popup-content #porcientos-tipo-suelo div.category-percent-colorbar.I{
+    background: #ee9144
+}
+
+#feature-info-popup-content #porcientos-tipo-suelo div.category-percent-colorbar.II{
+    background: #9ba011
+}
+
+#feature-info-popup-content #porcientos-tipo-suelo div.category-percent-colorbar.III{
+    background: #1fb07b
+}
+
+#feature-info-popup-content #porcientos-tipo-suelo div.category-percent-colorbar.IV{
+    background: #a840b3
+}
+/*GRÁFICA DE COLORES DE TIPOS DE SUELO - FIN*/
+
+/*ACCIONES ACCORDION*/
+#feature-info-popup-content div.collapse, #feature-info-popup-content div.collapsing{
+    color: black
+}
+
+#feature-info-popup-content div.card-header{
+    padding: 0;
+    background: white
+}
+
+#feature-info-popup-content div.card-body{
+    padding: .5rem;
+    background: rgb(218, 218, 218);
+}
+
+#feature-info-popup-content div.card-header button.btn-link{
+    padding: 0 .5rem
+}
+
+#feature-info-popup-content #lista-acciones li.hecho{
+    color: green;
+    text-decoration-line: line-through;
+
+}
+
+#feature-info-popup-content #lista-acciones li i.fa{
+    cursor: pointer;
+    visibility: hidden
+}
+
+#feature-info-popup-content #lista-acciones li.hecho i.fa,
+#feature-info-popup-content #lista-acciones li:hover i.fa,
+#feature-info-popup-content #lista-acciones #master-checkbox{
+    visibility: visible
+}
+
+
+/*ACCIONES ACCORDION - FIN*/
+

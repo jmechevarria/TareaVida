@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Sueloafectados list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Geom</th>
+                <th>Clasifid</th>
+                <th>Clasifidcomp</th>
+                <th>Municipioid</th>
+                <th>Clasificacionid</th>
+                <th>Municipio</th>
+                <th>Tipos</th>
+                <th>Subtipos</th>
+                <th>Gravillosidad</th>
+                <th>Pedregosidad</th>
+                <th>Rocosidad</th>
+                <th>Profundidadefectiva</th>
+                <th>Pendiente</th>
+                <th>Claveperfil</th>
+                <th>Perfil</th>
+                <th>Control</th>
+                <th>Profundidad</th>
+                <th>Hojacartogrfica</th>
+                <th>Nro</th>
+                <th>W</th>
+                <th>E</th>
+                <th>Salinidad</th>
+                <th>Erosion</th>
+                <th>Clasificacionid2</th>
+                <th>Claveperfil2</th>
+                <th>Ajo</th>
+                <th>Arrozfrio</th>
+                <th>Arrozprimavera</th>
+                <th>Berengena</th>
+                <th>Boniato</th>
+                <th>Cafe</th>
+                <th>Calabaza</th>
+                <th>Caasoca</th>
+                <th>Cebolla</th>
+                <th>Citrico</th>
+                <th>Col</th>
+                <th>Frijoles</th>
+                <th>Frutabomba</th>
+                <th>Guayaba</th>
+                <th>Maiz</th>
+                <th>Malangacolocacia</th>
+                <th>Malangaxantosorna</th>
+                <th>Mango</th>
+                <th>Meln</th>
+                <th>Papa</th>
+                <th>Pastoartificial</th>
+                <th>Pepino</th>
+                <th>Pimiento</th>
+                <th>Pia</th>
+                <th>Platanofruta</th>
+                <th>Platanovianda</th>
+                <th>Remolacha</th>
+                <th>Tabaco</th>
+                <th>Tomate</th>
+                <th>Yuca</th>
+                <th>Zanahoria</th>
+                <th>Catgral10cult</th>
+                <th>Area</th>
+                <th>Gid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sueloAfectado in sueloAfectados %}
+            <tr>
+                <td><a href="{{ path('sueloafectado_show', { 'gid': sueloAfectado.gid }) }}">{{ sueloAfectado.geom }}</a></td>
+                <td>{{ sueloAfectado.clasifId }}</td>
+                <td>{{ sueloAfectado.clasifidcomp }}</td>
+                <td>{{ sueloAfectado.municipioid }}</td>
+                <td>{{ sueloAfectado.clasificacionid }}</td>
+                <td>{{ sueloAfectado.municipio }}</td>
+                <td>{{ sueloAfectado.tipos }}</td>
+                <td>{{ sueloAfectado.subtipos }}</td>
+                <td>{{ sueloAfectado.gravillosidad }}</td>
+                <td>{{ sueloAfectado.pedregosidad }}</td>
+                <td>{{ sueloAfectado.rocosidad }}</td>
+                <td>{{ sueloAfectado.profundidadEfectiva }}</td>
+                <td>{{ sueloAfectado.pendiente }}</td>
+                <td>{{ sueloAfectado.clavePerfil }}</td>
+                <td>{{ sueloAfectado.perfil }}</td>
+                <td>{{ sueloAfectado.control }}</td>
+                <td>{{ sueloAfectado.profundidad }}</td>
+                <td>{{ sueloAfectado.hojacartogrFica }}</td>
+                <td>{{ sueloAfectado.nro }}</td>
+                <td>{{ sueloAfectado.w }}</td>
+                <td>{{ sueloAfectado.e }}</td>
+                <td>{{ sueloAfectado.salinidad }}</td>
+                <td>{{ sueloAfectado.erosion }}</td>
+                <td>{{ sueloAfectado.clasificacionid2 }}</td>
+                <td>{{ sueloAfectado.clavePerfil2 }}</td>
+                <td>{{ sueloAfectado.ajo }}</td>
+                <td>{{ sueloAfectado.arrozFrio }}</td>
+                <td>{{ sueloAfectado.arrozPrimavera }}</td>
+                <td>{{ sueloAfectado.berengena }}</td>
+                <td>{{ sueloAfectado.boniato }}</td>
+                <td>{{ sueloAfectado.cafe }}</td>
+                <td>{{ sueloAfectado.calabaza }}</td>
+                <td>{{ sueloAfectado.caASoca }}</td>
+                <td>{{ sueloAfectado.cebolla }}</td>
+                <td>{{ sueloAfectado.citrico }}</td>
+                <td>{{ sueloAfectado.col }}</td>
+                <td>{{ sueloAfectado.frijoles }}</td>
+                <td>{{ sueloAfectado.frutabomba }}</td>
+                <td>{{ sueloAfectado.guayaba }}</td>
+                <td>{{ sueloAfectado.maiz }}</td>
+                <td>{{ sueloAfectado.malangaColocacia }}</td>
+                <td>{{ sueloAfectado.malangaXantosorna }}</td>
+                <td>{{ sueloAfectado.mango }}</td>
+                <td>{{ sueloAfectado.melN }}</td>
+                <td>{{ sueloAfectado.papa }}</td>
+                <td>{{ sueloAfectado.pastoArtificial }}</td>
+                <td>{{ sueloAfectado.pepino }}</td>
+                <td>{{ sueloAfectado.pimiento }}</td>
+                <td>{{ sueloAfectado.piA }}</td>
+                <td>{{ sueloAfectado.platanoFruta }}</td>
+                <td>{{ sueloAfectado.platanoVianda }}</td>
+                <td>{{ sueloAfectado.remolacha }}</td>
+                <td>{{ sueloAfectado.tabaco }}</td>
+                <td>{{ sueloAfectado.tomate }}</td>
+                <td>{{ sueloAfectado.yuca }}</td>
+                <td>{{ sueloAfectado.zanahoria }}</td>
+                <td>{{ sueloAfectado.catgral10cult }}</td>
+                <td>{{ sueloAfectado.area }}</td>
+                <td>{{ sueloAfectado.gid }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('sueloafectado_show', { 'gid': sueloAfectado.gid }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('sueloafectado_edit', { 'gid': sueloAfectado.gid }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('sueloafectado_new') }}">Create a new sueloAfectado</a>
+        </li>
+    </ul>
+{% endblock %}

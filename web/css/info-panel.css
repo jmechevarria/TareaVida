@@ -1,0 +1,87 @@
+#info-panel {
+    position: fixed;
+    width: 84%;
+    left: 16%;
+    top: 70%;
+    height: 30%;
+    background: white;
+    border: 1px solid;
+    box-shadow: black 0 0 5px;
+    display: none
+}
+
+#info-panel.visible-info {
+    display: block
+}
+
+#info-panel .tabbable{
+    height: 100%
+}
+
+#info-panel .tabbable .tab-content{
+    height: 88%;
+    overflow: auto
+}
+
+#info-panel .tabbable ul {
+    margin: 0
+}
+
+#info-panel .tabbable ul li{
+    height: 12%;
+}
+
+#info-panel .tabbable ul li a{
+    padding: 0 5px
+}
+/*
+#info-panel table thead, #info-panel table tbody{
+    display: block
+}*/
+
+#info-panel tr.highlighted{
+    background: rgb(104, 104, 206);
+    font-weight: bold;
+    color: white
+}
+
+#info-panel ul.nav li span.close{
+    /*padding: 3px 4px;*/
+    font-size: 12px;
+    opacity: 1;
+    color: red
+}
+
+/*PARA FIJAR EL THEAD*/
+#info-panel table.fixedTHead tbody{
+    position: relative;
+    display: block;
+    z-index: 0
+}
+
+#info-panel table.fixedTHead thead{
+    position: fixed;
+    background: #aa9d9d;
+    display: block;
+    z-index: 1
+}
+
+#info-panel th, #info-panel td{
+    text-align: center;
+    border-right: 1px solid;
+    font-size: 13px;
+    border-bottom: 0
+}
+/*PARA FIJAR EL THEAD - FIN*/
+
+#info-panel table td{
+    padding: 1px
+}
+
+#handle {
+    width: 100%;
+    height: 7px;
+    top: 0;
+    z-index: 10;
+    background: transparent;
+}

@@ -1,0 +1,24 @@
+group_index:
+    path:     /
+    defaults: { _controller: "TareaVidaBundle:LayerGroup:index" }
+    methods:  GET
+
+group_show:
+    path:     /{id}/show
+    defaults: { _controller: "TareaVidaBundle:LayerGroup:show" }
+    methods:  GET
+
+group_new:
+    path:     /new
+    defaults: { _controller: "TareaVidaBundle:LayerGroup:new" }
+    methods:  [GET, POST]
+
+group_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "TareaVidaBundle:LayerGroup:edit" }
+    methods:  [GET, POST]
+
+group_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "TareaVidaBundle:LayerGroup:delete" }
+    methods:  DELETE

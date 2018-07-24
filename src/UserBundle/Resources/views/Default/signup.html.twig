@@ -1,0 +1,48 @@
+{#{% extends 'forms.html.twig' %}
+
+{% block title %}Signup{% endblock %}
+{% block content %}
+    <form class="form" id="signup-form" action="{{ path('user_signup') }}" method="post" {{ form_enctype(form) }}
+          name="{{form.vars.name}}">
+        <div class="form-section">
+            <label class="form-header"><i class='fa-cog fa-spin'></i> Account info</label>
+            <div class="row">
+                <div class="col-3">
+                    {{form_widget(form.image)}}
+                </div>
+                <div class="col-9">
+                    {{form_row(form.username)}}
+                    {{form_row(form.email)}}
+                    {{form_row(form.password)}}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class='form-section'>
+            <label class="form-header"><i class='fa-user'></i> Personal info</label>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-9">
+                    {{form_row(form.name)}}
+                    {{form_row(form.lastname)}}
+                </div>
+            </div>
+        </div>
+        {{form_rest(form)}}
+        <div class="form-actions">
+            <button name="submit" type="submit"
+                    class="btn btn-primary"><I class="fa-check"></I>
+                {{'Save'|trans}}</button>
+            <a class="btn" href="{{ path('homepage') }}">
+                <I class="fa-ban"></I> {{'Cancel'|trans}}</a>
+        </div>
+    </form>
+{% endblock %}#}{#
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+    {% if errors|length > 0 %}
+            processErrors("{{errors|json_encode()}}");
+            {% endif %}
+                </script>
+{% endblock %}#}

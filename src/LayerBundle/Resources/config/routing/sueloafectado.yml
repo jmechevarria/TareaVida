@@ -1,0 +1,34 @@
+sueloafectado_index:
+    path:     /
+    defaults: { _controller: "LayerBundle:SueloAfectado:index" }
+    methods:  GET
+
+sueloafectado_show:
+    path:     /{gid}/show
+    defaults: { _controller: "LayerBundle:SueloAfectado:show" }
+    methods:  GET
+
+sueloafectado_new:
+    path:     /new
+    defaults: { _controller: "LayerBundle:SueloAfectado:new" }
+    methods:  [GET, POST]
+
+sueloafectado_edit:
+    path:     /{gid}/edit
+    defaults: { _controller: "LayerBundle:SueloAfectado:edit" }
+    methods:  [GET, POST]
+
+sueloafectado_delete:
+    path:     /{gid}/delete
+    defaults: { _controller: "LayerBundle:SueloAfectado:delete" }
+    methods:  DELETE
+
+agroprod_suelos:
+    path:     /agroprod_suelos/
+    defaults: { _controller: "LayerBundle:SueloAfectado:agroprodSuelos" }
+    methods:  GET
+
+gestionar_acciones:
+    path:     /gestionar_acciones/
+    defaults: { _controller: "LayerBundle:SueloAfectado:gestionarAcciones" }
+    methods:  [POST, GET]

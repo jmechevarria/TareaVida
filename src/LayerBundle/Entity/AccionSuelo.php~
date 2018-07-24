@@ -1,0 +1,36 @@
+<?php
+
+namespace LayerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AccionSuelo
+ *
+ * @ORM\Table(name="accion_suelo")
+ * @ORM\Entity(repositoryClass="LayerBundle\Repository\AccionSueloRepository")
+ */
+class AccionSuelo {
+
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="AccionDeMejoramiento", inversedBy="asociacionAccionSuelo")
+     * @ORM\JoinColumn(name="accion_id", referencedColumnName="id")
+     */
+    private $accion;
+
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="SueloAfectado", inversedBy="asociacionAccionSuelo")
+     * @ORM\JoinColumn(name="suelo_id", referencedColumnName="gid")
+     */
+    private $suelo;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $hecho;
+
+}

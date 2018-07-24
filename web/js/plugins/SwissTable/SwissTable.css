@@ -1,0 +1,120 @@
+/******************************************MAIN******************************************/
+.swiss-table{
+    background: white;
+    width: 100%
+}
+
+.swiss-table *{
+    text-align: center;
+    color: black
+}
+
+.swiss-table th, .swiss-table td{
+    vertical-align: middle;
+    padding: .3% 5px;
+    border: none
+}
+
+.swiss-table .table-title{
+    font-size: 30px;
+}
+
+.swiss-table thead th{
+    border-bottom: none;
+}
+
+.swiss-table tr{
+    transition: ease .1s
+}
+
+.swiss-table tbody tr:nth-child(odd){
+    background: rgb(236, 234, 234)
+}
+
+.swiss-table tbody tr:nth-child(even){
+    background: rgb(255, 255, 255)
+}
+
+.swiss-table tbody tr:hover{
+    background: rgb(140, 220, 242)
+}
+
+#last-row{
+    box-shadow: black 0 0 5px inset;
+}
+
+.swiss-table #last-row td.add-new a i{
+    color: black
+}
+
+.swiss-table .option{
+    background: lightgray;
+}
+
+.swiss-table .option.show i{
+    color: green
+}
+
+.swiss-table .option.edit i{
+    color: navy
+}
+
+/******************************************FILTERS******************************************/
+#filters-row select,
+#filters-row input,
+#filters-row th > *{
+    width: 100%
+}
+/*
+#options .row{
+    background: lightgray;
+    padding: 2px
+}*/
+
+#options .row div{
+    border-right: 1px solid black;
+    /*padding: 0;*/
+    background: white;
+    cursor: pointer
+}
+
+#options .row div:hover{
+    opacity: .8
+}
+
+#options .row div:active{
+    opacity: .3
+}
+
+.swiss-table #options i.fa-ban{
+    color: red
+}
+
+.swiss-table #options i.fa-file{
+    color: blue
+}
+
+/*#rows-shown{
+    color: black;
+}*/
+
+/******************************************DELETE******************************************/
+#raise-delete-modal i{
+    color: red
+}
+
+#raise-delete-modal sup span{
+    background: rgb(212, 26, 26);
+    color: rgb(255, 255, 255);
+    font-weight: normal;
+    font-size: small;
+}
+
+.swiss-table tbody tr.to-be-deleted{
+    background: rgb(255, 180, 180);
+    text-decoration: line-through
+}
+
+.to-be-deleted td.option.delete i{
+    color: red
+}

@@ -1,0 +1,18 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Dec 22, 2014, 5:58:36 PM
+    Author     : jm
+*/
+
+select.picker__select--month,
+select.picker__select--year{
+    padding: 0px;
+}
+
+div.picker[id$="_root"]{
+    width: 25%;
+}

@@ -1,0 +1,23 @@
+layer:
+    resource: "@LayerBundle/Resources/config/routing.yml"
+    prefix:   /layer/
+
+tareavida:
+    resource: "@TareaVidaBundle/Resources/config/routing.yml"
+    prefix:   /tareavida/
+
+homepage:
+    path: /
+    defaults: { _controller: FrontendBundle:Default:homepage }
+
+frontend:
+    resource: "@FrontendBundle/Resources/config/routing.yml"
+    prefix:   /frontend/
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /user/
+#
+#app:
+#    resource: '@AppBundle/Controller/'
+#    type: annotation

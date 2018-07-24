@@ -1,0 +1,77 @@
+{% block extends %}
+{{ "{% extends '" ~ bundle ~ ":" ~ entity ~ ":layout.html.twig' %}" }}
+{% endblock extends %}
+
+{{ "{% block title %}{{parent()}} |" }} Datos de {{"{{ entity }}"}}{{"{% endblock title %}"}}
+
+{% block body %}
+{{ "{% block body -%}" }}
+    <h1>{{entity}}: {{"{{entity}}"}}</h1>
+
+    <div class="row-fluid">
+        <div class="span9">
+            <table class="table table-bordered show-table">
+                <tbody>
+
+                {%- for field, metadata in fields %}
+                {% if field|capitalize == 'Id' %}
+
+                    {{ "{% if is_granted('ROLE_SUPER_ADMIN') %}" }}
+                {% endif %}
+
+                        <tr>
+                            <th>{{ field|capitalize }}</th>
+
+                            {%- if metadata.type in ['date', 'datetime'] %}
+
+                            {% set time = metadata.type == 'date' ? '' : ' H:i:s' %}
+
+                            <td>{{"{{ entity." ~ field|replace({'_' : ''}) ~ " != null ? entity." ~
+                            field|replace({'_' : ''}) ~ "|date(\'Y-m-d'" ~ time ~ ") : '-' }}"}}</td>
+                            {#{{ "{% if entity." ~ field|replace({'_': ''}) ~ " %}" }}
+                                <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d' ~ time ~ '\') }}' }}</td>
+                            {{ "{%else%}" }}
+                                <td>-</td>
+                            {{ "{% endif %}" }}#}
+
+                            {%- else %}
+
+                            <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
+
+                            {%- endif %}
+
+                        </tr>
+                {% if field|capitalize == 'Id' %}
+
+                    {{ "{% endif %}" }}
+                {% endif %}
+                {%- endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        <div class="span3">
+            <ul class="nav nav-list options-menu">
+                <li class="nav-header">
+                <center><i class="fa-cog fa-white"></i> Acciones</center>
+                </li>
+                <li>
+                    <a href="{{"{{ path('" ~ route_name_prefix ~ "') }}"}}">
+                        <i class="fa-th-list"></i> Ver lista
+                    </a>
+                </li>
+                <li>
+                    <a href="{{"{{ path('" ~ route_name_prefix ~ "_edit',{'id' : entity.id}) }}"}}">
+                        <i class="fa-edit"></i> Editar
+                    </a>
+                </li>
+                <li>
+                    <a href="{{"{{ path('" ~ route_name_prefix ~ "_new') }}"}}">
+                        <i class="fa-asterisk"></i> Nuevo
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{{ "{% endblock %}" }}
+{% endblock body %}

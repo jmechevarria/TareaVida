@@ -1,0 +1,29 @@
+ascensonmm_index:
+    path:     /
+    defaults: { _controller: "LayerBundle:AscensoNMM:index" }
+    methods:  GET
+
+ascensonmm_show:
+    path:     /{gid}/show
+    defaults: { _controller: "LayerBundle:AscensoNMM:show" }
+    methods:  GET
+
+ascensonmm_new:
+    path:     /new
+    defaults: { _controller: "LayerBundle:AscensoNMM:new" }
+    methods:  [GET, POST]
+
+ascensonmm_edit:
+    path:     /{gid}/edit
+    defaults: { _controller: "LayerBundle:AscensoNMM:edit" }
+    methods:  [GET, POST]
+
+ascensonmm_delete:
+    path:     /{gid}/delete
+    defaults: { _controller: "LayerBundle:AscensoNMM:delete" }
+    methods:  DELETE
+
+lista_annos:
+    path:     /lista_annos/
+    defaults: { _controller: "LayerBundle:AscensoNMM:listaAnnos" }
+    methods:  GET

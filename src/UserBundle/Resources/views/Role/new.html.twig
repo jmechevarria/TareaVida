@@ -1,0 +1,51 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} | Nuevo rol{% endblock title %}
+
+{% block content %}
+    {#    {% if form_errors(form)|trim != '' %}
+                <div class="alert alert-error">
+                    <i class="fa-ban-circle"></i>&nbsp; Verifique los campos se&ntilde;alados en rojo.
+                </div>
+            {% endif %}
+        #}
+    {#    <center>#}
+    <FORM class="form-horizontal" action="{{ path('role_create', { 'id' : entity.id }) }}"
+          method="post" {{ form_enctype(form) }}>
+
+        <center><h3>Crear rol</h3></center>
+
+        {{ form_widget(form) }}
+        <DIV class="form-actions">
+            <BUTTON name="submit" type="submit"
+                    class="btn btn-primary"><I class="fa-check"></I>
+                {{'Guardar'|trans}}</BUTTON>
+            <a class="btn" href="{{ path('role') }}">
+                <I class="fa-ban"></I> {{'Cancelar'|trans}}</a>
+        </DIV>
+    </FORM>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {#<script type="text/javascript">
+        //HELP SPANS IN ROLE FORM
+        $(document).ready(function() {
+            var span = document.createElement('span');
+            var text = document.createTextNode('?');
+            span.appendChild(text);
+
+            $('div#gc_userbundle_role').children('div').eq(0).children('div#widget_span')
+                    .children('input').after(span);
+
+            span.setAttribute('id', 'role_name_help');
+            span.setAttribute('class', 'mytooltip badge badge-info');
+            span.setAttribute('data-original-title', 'Formato:\n\
+    "ROLE_" + <nombre del rol en mayúsculas> Ejemplo: ROLE_ADMIN');
+
+            span.setAttribute('data-placement', 'right');
+
+            span.setAttribute('title', '');
+        });
+    </script>#}
+
+{% endblock %}

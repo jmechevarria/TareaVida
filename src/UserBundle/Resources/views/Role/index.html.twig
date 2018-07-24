@@ -1,0 +1,57 @@
+{% extends 'UserBundle::layout.html.twig' %}
+{% block title %}
+    {{ parent() }} | Administrar roles
+{% endblock %}
+{% block content %}
+    <TABLE class="table table-bordered {% if entities %}table-filtered{% endif %}">
+        <thead>
+            <TR class="table-title">
+                <TH>Roles</TH>
+            </TR>
+            {% if entities %}
+                <tr class="before-filters">
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th class="no-filter" colspan="3">Opciones</th>
+                </tr>
+            {% endif %}
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('role_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.name }}</td>
+                    <TD class="option">
+                        <A href="{{ path('role_show', { 'id' : entity.id }) }}">
+                            <I class="fa-list green"></I></A>
+                    </TD>
+                    <TD class="option">
+                        <A href="{{ path('role_edit', { 'id' : entity.id }) }}"
+                           data-original-title="Editar" title="" data-placement="top">
+                            <I class="fa-pencil-square-o blue"></I></A>
+                    </TD>
+                    <TD class="option">
+                        <A class="mytooltip" href="#role_delete{{entity.id}}"
+                           data-toggle="modal"
+                           data-original-title="Eliminar" title="" data-placement="top">
+                            <I class="fa-trash red"></I></A>
+                                {% include 'modals/modal_role_delete.html.twig' %}
+
+                    </TD>
+                </tr>
+            {% endfor %}
+            <TR class="add_new" filter="false">
+                <td>
+                    <a href="{{ path('role_new') }}"><img src="{{ asset('bundles/frontend/images/add.png') }}"
+                                                          alt="Adicionar usuario"
+                                                          title="Adicionar usuario">
+                    </a>
+                </td>
+            </TR>
+        </tbody>
+    </table>
+
+    {% if not entities %}
+        <DIV class="alert alert-info"><CENTER><STRONG>No existen roles en el sistema.</STRONG></CENTER></DIV>
+                {% endif %}
+            {% endblock %}

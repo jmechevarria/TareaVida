@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>{% block title %}Geoportal | Tarea Vida{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/bootstrap-4.1.1/css/bootstrap.min.css') }}"/>
+
+        <link id="loader-styles" rel="stylesheet" type="text/css" href="{{ asset ('css/loader.css') }}"/>
+{#        <link id="bootstrap-styles" rel="stylesheet" href="{{ asset ('bundles/frontend/css/Flatty/assets/stylesheets/bootstrap/bootstrap.css') }}"/>#}
+        <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/jquery-ui-1.12.1.custom/jquery-ui.structure.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/jquery-ui-1.12.1.custom/jquery-ui.theme.min.css') }}"/>
+{#        <link id="color-settings-body-color" rel="stylesheet" href="{{ asset ('bundles/frontend/css/Flatty/assets/stylesheets/light-theme.css') }}"/>#}
+{#        <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/Flatty/assets/stylesheets/theme-colors.css') }}"/>#}
+{#        <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/Flatty/assets/stylesheets/theme-switcher.css') }}"/>#}
+{#        <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/font-awesome-4.0.3.css') }}"/>#}
+{#        <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/fonts/jmfont/jm-font.css') }}"/>#}
+        <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/fonts/ExtFA/css/ext-font-awesome.css') }}"/>
+
+        <link rel="stylesheet" type="text/css" href="{{ asset ('bundles/frontend/js/OL-4.4.1/ol.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/base.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/map.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/popup.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/sidebar.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/header-nav.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/queries.css') }}"/>
+        {#        <link rel="stylesheet" type="text/css" href="{{ asset ('bundles/frontend/js/EXT-6.2.0/build/classic/theme-gray/resources/theme-gray-all.css') }}">#}
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    </head>
+    <body>
+        {% set server = app.request.server %}
+        {% set request_scheme = server.get('REQUEST_SCHEME') %}
+        {% set http_host = server.get('HTTP_HOST') %}
+        {% set base = server.get('BASE') %}
+        {% set env = app.environment %}
+        {% block body %}
+            <noscript>
+            <div class="alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p style="text-align: center">This view requires JavaScript to work properly.<br>
+                    Please, activate JavaScript in your browser.</p>
+            </div>
+            </noscript>
+                {% include 'default/loader.html.twig' %}
+                {% block header %}
+                <header>
+                    <nav id="header-nav" class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+                        <a class="navbar-brand {#hidden#}" href="#">Tarea Vida</a>
+                        <button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-target-collapse" aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbar-target-collapse">
+                            <ul id="main-nav" class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown">
+                                    <a id="afectaciones" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" 
+                                       aria-expanded="false">Afectaciones</a>
+                                    <div class="dropdown-menu" aria-labelledby="afectaciones">
+                                        <a id="agroprod-suelos" class="dropdown-item" href="#">Agroproductividad en los suelos</a>
+                                        <a id="parcelas-afectadas-tipo-uso" class="dropdown-item" href="#">Parcelas afectadas por tipo de uso</a>
+                                        <a id="usufructuarios-afectados" class="dropdown-item" href="#">Usufructuarios afectados</a>
+                                        <a id="afectaciones-forma-productiva" class="dropdown-item" href="#">Afectaciones por forma productiva</a>
+                                        {#                                        <div class="dropdown submenu dropright">#}
+                                        <a id="area-ascenso-nmm" class="dropdown-item {#dropdown-toggle#}" href="#" {#data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"#}>
+                                            &Aacute;rea de ascenso del nivel medio del mar
+                                        </a>
+                                        {#  <div class="dropdown-menu" aria-labelledby="area-ascenso-nmm">
+                                              <a id="area-ascenso-nmm-2050" data-id="2" class="dropdown-item" href="#">2050</a>
+                                              <a id="area-ascenso-nmm-2100" data-id="3" class="dropdown-item" href="#">2100</a>
+                                          </div>
+                                      </div>#}
+                                    </div>
+                                </li>
+                                {#<li class="nav-item dropdown">
+                                    <a id="acciones" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" 
+                                       aria-expanded="false">Acciones</a>
+                                    <div class="dropdown-menu" aria-labelledby="acciones">
+                                        <a id="acciones-forma-prod" class="dropdown-item" href="#">
+                                            Por forma productiva
+                                        </a>
+                                    </div>
+                                </li>#}
+                                {#<li class="nav-item dropdown">
+                                    <a id="admin" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" 
+                                       aria-expanded="false">Administraci&oacute;n</a>
+                                    <div class="dropdown-menu" aria-labelledby="admin">
+                                       <a class="dropdown-item" href="{{ path('manage_metadata') }}">Gestionar metadatos</a>
+                                    </div>
+                                </li>#}
+                            </ul> 
+                            {#<form class="form-inline my-2 my-md-0">
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="Buscar" 
+                                           aria-label="Buscar" aria-describedby="header-search" type="text">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="header-search"><i class="fa fa-search"></i></span>
+                                    </div>
+                                </div>
+                            </form>#}
+                            {#<ul id="user-menu" class="navbar-nav">
+                                <li class="dropdown dark">
+                                    <a id="dropdown-user-menu" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <img alt="INVITADO" src="{{asset('images/icon-user-default.png')}}" height="23" width="23">
+                                        <span class="user-name">INVITADO</span>
+                                        <b class="caret"></b>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown-user-menu">
+                                        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Perfil</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Ajustes</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-signout"></i> Salir</a>
+                                    </div>
+                                </li>
+                            </ul>#}
+                        </div>
+                    </nav>
+                </header>
+            {% endblock header %}
+            <div id="main-container">
+            {% block sidebar %}{% endblock sidebar %}
+            <section id="map-section">
+                {% block section %}
+                    {% block map %}{% endblock map %}
+                    {% block queries %}{% endblock queries %}
+                    {% block legend %}{% endblock legend %}
+                    <span id="test"></span>
+                    {% block popups %}{% endblock popups %}
+                    <span id="test3"></span>
+
+                {% endblock section %}
+            </section>
+            {% block info_panel %}{% endblock info_panel %}
+            </div>
+
+            
+            <script type="text/javascript" src="{{ asset('bundles/frontend/js/jquery-3.2.1/jquery-3.2.1.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('bundles/frontend/js/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}" ></script>
+
+            {#popper.min.js es necesario para que funcionen los tooltips de bootstrap#}
+            <script type="text/javascript" src="{{ asset('bundles/frontend/js/popper.min.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('bundles/frontend/css/bootstrap-4.1.1/js/bootstrap.js') }}" ></script>
+            {#        <script type="text/javascript" src="{{ asset('bundles/frontend/css/Flatty/assets/javascripts/jquery/jquery.min.js') }}" ></script>#}
+            {#        <script type="text/javascript" src="{{ asset('bundles/frontend/css/Flatty/assets/javascripts/jquery/jquery.mobile.custom.min.js') }}" ></script>#}
+{#            <script type="text/javascript" src="{{ asset('bundles/frontend/css/Flatty/assets/javascripts/jquery/jquery-migrate.min.js') }}" ></script>#}
+            
+{#            <script type="text/javascript" src="{{ asset('bundles/frontend/css/Flatty/assets/javascripts/jquery/jquery-ui.min.js') }}" ></script>#}
+            {#        <script type="text/javascript" src="{{ asset('bundles/frontend/js/bootstrap4.0.0-alpha.6/tether.min.js') }}" ></script>#}
+            {#        <script type="text/javascript" src="{{ asset('bundles/frontend/js/bootstrap4.0.0-alpha.6/bootstrap.min.js') }}" ></script>#}
+
+{#            <script type="text/javascript" src="{{ asset('bundles/frontend/css/Flatty/assets/javascripts/bootstrap/bootstrap.js') }}" ></script>#}
+            <script type="text/javascript" src="{{ asset('js/loader.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('js/base.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('js/header-nav.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('js/sidebar.js') }}" ></script>
+            <script type="text/javascript" src="{{ asset('js/search-layer.js') }}" ></script>
+            
+{#            <script type="text/javascript" src="{{ asset('bundles/frontend/css/Flatty/assets/javascripts/theme.js') }}" ></script>#}
+{#            <script type="text/javascript" src="{{ asset('bundles/frontend/css/Flatty/assets/javascripts/theme-switcher.js') }}" ></script>#}
+            {#The line below is only needed for old environments like Internet Explorer and Android 4.x
+            <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+            #}
+            <script type="text/javascript" src="{{ asset('bundles/frontend/js/OL-4.4.1/ol-debug.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/frontend/js/turf/turf.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/frontend/js/turf/jsts.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/frontend/js/turf/martinez.js') }}"></script>
+            
+            <script type="text/javascript">
+                function getEX_GeographicBoundingBox(result) {
+                    return result.Capability.Layer.Layer.find(l => l.Name === 'dbtarea_vida:municipio').EX_GeographicBoundingBox;
+                }
+            </script>
+            {% block javascripts %}
+                <script type="text/javascript">
+                    var __request_scheme = '{{request_scheme}}';
+                    var __http_host = '{{http_host}}';
+                    var __base = '{{base}}';
+                    var __env = '{{env}}';
+		      var get_layers_metadata = '{{url('get_layers_metadata')}}';
+                    var interaccion_parcela_afectada = '{{url('interaccion_parcela_afectada')}}';
+                    var gestionar_acciones = '{{url('gestionar_acciones')}}';
+                    var agroprod_suelos = '{{url('agroprod_suelos')}}';
+                    var parcelas_afectadas_tipo_uso = '{{url('parcelas_afectadas_tipo_uso')}}';
+                    var usufructuarios_afectados = '{{url('usufructuarios_afectados')}}';
+                    var afectaciones_forma_productiva = '{{url('afectaciones_forma_productiva')}}';
+                    var usufructuarios_afectados = '{{url('usufructuarios_afectados')}}';
+
+                </script>
+            {% endblock %}
+        {% endblock %}
+    </body>
+</html>

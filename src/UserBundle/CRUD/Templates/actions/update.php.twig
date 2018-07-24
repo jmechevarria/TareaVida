@@ -1,0 +1,71 @@
+    /**
+{% block phpdoc_method_header %}
+     * Edits an existing {{ entity }} entity.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/{id}", name="{{ route_name_prefix }}_update")
+     * @Method("PUT")
+     * @Template("{{ bundle }}:{{ entity }}:edit.html.twig")
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function updateAction(Request $request, $id) {
+{% endblock method_definition %}
+{% block method_body %}
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('{{ bundle }}:{{ entity }}')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find {{ entity }} entity.');
+        }
+
+        $editForm = $this->createEditForm($entity);
+        $editForm->submit($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('{{ route_name_prefix }}_show', array('id' => $id)));
+        }
+
+        $errors = array();
+        foreach ($editForm as $field) {
+            if ($field->getConfig()->getType()->getName() != 'repeated') {
+                if ($field->getErrors()) {
+                    $name = $field->getName();
+                    $errors [$name] = $field->getErrors();
+                    $errors[$name] = $errors[$name][0]->getMessage();
+                }
+            } else {
+                $grandchildren = $field->all();
+                foreach ($grandchildren as $g) {
+                    if ($g->getErrors()) {
+                        $name = $field->getName() . '_' . $g->getName();
+                        $errors [$name] = $g->getErrors();
+                        $errors[$name] = $errors[$name][0]->getMessage();
+                    }
+                }
+            }
+        }
+{% endblock method_body %}
+
+{% block method_return %}
+{% if 'annotation' == format %}
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'errors' => $errors
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:edit.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'errors' => $errors
+        ));
+{% endif %}
+{% endblock method_return %}
+    }

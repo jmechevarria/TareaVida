@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Layers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Friendlyname</th>
+                <th>Background</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for layer in layers %}
+            <tr>
+                <td><a href="{{ path('tareavida_layer_show', { 'id': layer.id }) }}">{{ layer.id }}</a></td>
+                <td>{{ layer.name }}</td>
+                <td>{{ layer.friendlyname }}</td>
+                <td>{{ layer.background }}</td>
+                <td>{{ layer.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('tareavida_layer_show', { 'id': layer.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('tareavida_layer_edit', { 'id': layer.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tareavida_layer_new') }}">Create a new layer</a>
+        </li>
+    </ul>
+{% endblock %}

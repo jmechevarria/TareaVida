@@ -1,0 +1,24 @@
+tareavida_layer_index:
+    path:     /
+    defaults: { _controller: "TareaVidaBundle:Layer:index" }
+    methods:  GET
+
+tareavida_layer_show:
+    path:     /{id}/show
+    defaults: { _controller: "TareaVidaBundle:Layer:show" }
+    methods:  GET
+
+tareavida_layer_new:
+    path:     /new
+    defaults: { _controller: "TareaVidaBundle:Layer:new" }
+    methods:  [GET, POST]
+
+tareavida_layer_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "TareaVidaBundle:Layer:edit" }
+    methods:  [GET, POST]
+
+tareavida_layer_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "TareaVidaBundle:Layer:delete" }
+    methods:  DELETE

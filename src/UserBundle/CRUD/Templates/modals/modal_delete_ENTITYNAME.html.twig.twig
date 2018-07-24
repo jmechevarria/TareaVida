@@ -1,0 +1,19 @@
+<div id="{{route_name_prefix}}_delete{{"{{entity.id}"}}}" class="modal alert-danger hide fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 id="myModalLabel">Advertencia.</h3>
+    </div>
+    <div class="modal-body">
+        <h>Se eliminarán ... <strong>{{"{{entity}}"}}</strong>.</h>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+        <a class="btn btn-danger" href="{{"{{ path('" ~ route_name_prefix ~ "_delete', { 'id' : entity.id }) }}"}}">Aceptar</a>
+    </div>
+</div>
+<style type="text/css" >
+    .modal-body h strong{
+        padding-bottom: 3px
+    }
+</style>

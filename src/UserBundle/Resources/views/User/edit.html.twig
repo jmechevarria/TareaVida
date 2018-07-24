@@ -1,0 +1,28 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block title %}{{parent()}} | Editar usuario{% endblock title %}
+
+{% block content %}
+    <FORM class="form-horizontal" action="{{ path('user_update', { 'id' : entity.id }) }}"
+          method="post" {{ form_enctype(edit_form) }} name="{{edit_form.vars.name}}">
+
+        <center><h3>Editar usuario: "{{ entity }}"</h3></center>
+
+        {{ form_widget(edit_form) }}
+        <DIV class="form-actions">
+            <BUTTON name="submit" type="submit"
+                    class="btn btn-primary"><I class="fa-check"></I>
+                {{'Guardar'|trans}}</BUTTON>
+            <a class="btn" href="{{ path('user') }}">
+                <I class="fa-ban"></I> {{'Cancelar'|trans}}</a>
+        </DIV>
+    </FORM>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        {% if errors is defined %}
+            processErrors("{{errors|json_encode()}}");
+        {% endif %}
+    </script>
+{% endblock %}

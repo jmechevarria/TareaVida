@@ -1,0 +1,44 @@
+ParcelaAgricolaAfectada_index:
+    path:     /
+    defaults: { _controller: "LayerBundle:ParcelaAgricolaAfectada:index" }
+    methods:  GET
+
+ParcelaAgricolaAfectada_show:
+    path:     /{gid}/show
+    defaults: { _controller: "LayerBundle:ParcelaAgricolaAfectada:show" }
+    methods:  GET
+
+ParcelaAgricolaAfectada_new:
+    path:     /new
+    defaults: { _controller: "LayerBundle:ParcelaAgricolaAfectada:new" }
+    methods:  [GET, POST]
+
+ParcelaAgricolaAfectada_edit:
+    path:     /{gid}/edit
+    defaults: { _controller: "LayerBundle:ParcelaAgricolaAfectada:edit" }
+    methods:  [GET, POST]
+
+ParcelaAgricolaAfectada_delete:
+    path:     /{gid}/delete
+    defaults: { _controller: "LayerBundle:ParcelaAgricolaAfectada:delete" }
+    methods:  DELETE
+
+parcelas_afectadas_tipo_uso:
+    path:     /parcelas_afectadas_tipo_uso/
+    defaults: { _controller: "LayerBundle:ParcelaAgricolaAfectada:parcelasAfectadasTipoUso" }
+    methods:  GET
+
+usufructuarios_afectados:
+    path:     /usufructuarios_afectados/
+    defaults: { _controller: "LayerBundle:ParcelaAgricolaAfectada:usufructuariosAfectados" }
+    methods:  GET
+
+afectaciones_forma_productiva:
+    path:     /afectaciones_forma_productiva/
+    defaults: { _controller: "LayerBundle:ParcelaAgricolaAfectada:afectacionesFormaProductiva" }
+    methods:  GET
+
+interaccion_parcela_afectada:
+    path:     /interaccion_parcela_afectada/
+    defaults: { _controller: "LayerBundle:ParcelaAgricolaAfectada:interaccionParcelaAfectada" }
+    methods:  GET

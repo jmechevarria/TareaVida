@@ -1,0 +1,93 @@
+{% extends 'UserBundle::layout.html.twig' %}
+{% block title %}
+    Users
+{% endblock %}
+{% block section %}
+    <TABLE>
+        <thead>
+            <TR class="table-title">
+                <TH colspan="10">Users </TH>
+            </TR>
+            {% if entities %}
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                    <th>Username</th>
+                    <th class="select-filter" filter-data="ROLE_USER ROLE_ADMIN">Role</th>
+                    <th class="boolean-filter" filter-data="ACTIVE">Active</th>
+                    <th class="number-filter">Age</th>
+                    <th class="no-filter" colspan="3">Options</th>
+                </tr>
+            {% endif %}
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                {% if entity.id < 110 %}
+                <tr dbid="{{ entity.id }}">
+                    <td>{{ entity.id }}</td>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.lastname }}</td>
+                    <td>{{ entity.username }}</td>
+                    <td>{{ entity.role }}</td>
+                    <td>{{ random(['ACTIVE', 'BLOCKED']) }}</td>
+                    <td>{{ random(100) }}</td>
+                    <TD class="option show">
+                        <A href="{{ path('user_show', { 'id' : entity.id }) }}">
+                            <I class="fa fa-list"></I></A>
+                    </TD>
+                    <TD class="option edit">
+                        <A href="{{ path('user_edit', { 'id' : entity.id }) }}">
+                            <I class="fa fa-pencil-square-o"></I></A>
+                    </TD>
+                    <TD class="option delete">
+                        {#<A><I class="fa fa-circle-o"></I></A>#}
+                    </TD>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            <TR id="last-row" class="no-filter">
+                <td colspan="7" class="add-new">
+                    <a href="{{ path('user_signup', {'signup_type' : 'admin'}) }}">
+                        <i class="fa fa-plus-circle fa-3x mytooltip"
+                           data-original-title="New user" data-placement="bottom"></i>
+                    </a>
+                </td>
+                <td colspan="3" id="delete-button-container"{#class="delete-selectedd"#}>
+                    {% if entities %}
+                        {#<a id="raise-delete-modal">
+                            <i class="fa fa-trash-o fa-2x red"
+                               data-original-title="Delete selected" data-placement="bottom"></i> <sup><label></label></sup>
+                        </a>#}
+                    {% endif %}
+                </td>
+            </TR>
+        </tbody>
+    </table>
+                    
+{#    {% include 'modals/modal_delete_several.html.twig' %}#}
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    <script type="text/javascript">
+        {% if entities %}
+            $('table').SwissTable({
+                filters: {
+                    rowBeforeFilters: 1,
+                    appendAmountTo: $('.table-title th:first')
+                },
+                delete: {
+                    deleteIconsContainer: 'td.option.delete',
+                    deleteButtonContainer: '#delete-button-container'
+                }
+            });
+            $('#raise-delete-modal').SnappyModal({
+                content: $('#delete-several'),
+                enterAccept: $('#ajax_delete'),
+                beforeOpen: function(){
+                    $('#delete-several #body b').text($('.to-be-deleted').length);
+                }
+            });
+        {% endif %}
+    </script>
+{% endblock %}

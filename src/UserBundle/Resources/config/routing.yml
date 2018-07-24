@@ -1,0 +1,29 @@
+user_login:
+    path: /login/
+    defaults: { _controller: UserBundle:Default:login }
+
+user_login_check:
+    path: /login_check/
+
+user_logout:
+    path: /logout/
+
+UserBundle_user:
+    resource: "@UserBundle/Resources/config/routing/user.yml"
+    prefix: /user/
+
+UserBundle_role:
+    resource: "@UserBundle/Resources/config/routing/role.yml"
+    prefix: /role/
+
+access_denied:
+    path:  /access_denied-logged={logged}/
+    defaults: { _controller: UserBundle:Default:accessDenied }
+
+user_profile:
+    path:  /profile/
+    defaults: { _controller: UserBundle:Default:profile }
+
+user_signup:
+    path: /signup/{signup_type}
+    defaults: { _controller: UserBundle:Default:signup }

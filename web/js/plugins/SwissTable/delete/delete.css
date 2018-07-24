@@ -1,0 +1,58 @@
+.table{
+    background: -moz-linear-gradient(top, rgba(20, 27, 178, .8) 10%, black 80%);
+    background: -webkit-linear-gradient(top, rgba(20, 27, 178, .8) 10%, black 80%);
+    background: -o-linear-gradient(top, rgba(20, 27, 178, .8) 10%, black 80%);
+    color: white;
+}
+
+.table *{
+    text-align: center;
+}
+
+.table tr:last-child td{
+    border: none !important
+}
+
+.table thead th{
+    border-bottom: 1px solid white;
+}
+
+.table /*thead */th, .table /*tbody */td{
+    vertical-align: middle;
+    padding: .5% 5px;
+    border: none
+}
+
+.table tbody td{
+    border-left: 1px solid white
+}
+
+.table tbody tr td:last-child{
+    border-right: 1px solid white
+}
+
+.table a, .table a:hover{
+    color: white;
+    text-decoration: none
+}
+
+.table .table-title{
+    font-size: 30px;
+}
+
+.table tr .delete-selected{
+    color: red
+}
+
+.table #last-row{
+    border-top: 1px solid white
+}
+
+.to-be-deleted td.option.delete i{
+    color: red
+}
+
+#raise-delete-modal sup{
+    color: red;
+    font-size: 1rem
+}
