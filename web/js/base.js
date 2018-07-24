@@ -1,4 +1,4 @@
-/*comment*/ $(document).ready(function() {
+/*commdfent*/ $(document).ready(function() {
     /*ON COLLAPSE LEFT NAVBAR*/
 //    $("#info-panel").bind('oanimationend animationend webkitAnimationEnd', function() {
 //        alert("fin")
