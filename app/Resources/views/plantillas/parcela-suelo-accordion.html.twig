@@ -1,0 +1,40 @@
+<div id="parcela-suelo-popup-content" style="display: none">
+    <ul class="atributos"></ul>
+    <div class="accordion">
+        <div class="card">
+            <div class="card-header" id="acciones-accordion-heading">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#acciones-accordion-body" aria-expanded="true" aria-controls="acciones-accordion-body"></button>
+                </h5>
+            </div>
+            <div style="" id="acciones-accordion-body" class="collapse show" aria-labelledby="acciones-accordion-heading" data-parent="#acciones-accordion">
+                <div class="card-body">
+                    <table id="tabla-acciones" class="table">
+                        <thead>
+                            <tr>
+                                <th>NOMBRE</th>
+                                <th><i id="master-checkbox" class="fa fa-square-o"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div class="row opciones">
+                        <div class="col-6">
+                            <div>
+                                <span class="badge" style="text-decoration: line-through; color: green;"><i class="fa fa-check-square"></i> Hecho</span> 
+                                <span class="badge"><i class="fa fa-square-o"></i> Por hacer</span>
+                            </div>
+                            <div>
+                                <span class="badge" style="text-decoration: line-through; color: rgb(213, 36, 36);"><i class="fa fa-close"></i> Eliminar</span> 
+                                <span style="color: rgb(14, 101, 231);" class="badge"><i class="fa fa-undo"></i>Mantener</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right;" class="col-6">
+                            <button style="right: 0px; bottom: 0px; position: absolute;" class="btn btn-success">Guardar cambios</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
