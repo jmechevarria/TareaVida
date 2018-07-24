@@ -20,13 +20,7 @@ $(document).ready(function() {
  */
 function runAsynchronousCalls() {
     getWMSCapabilities();
-    //para crear la URL se usan variables globales declaradas en 'base.html.twig'
-/*    var goalURL = __request_scheme + '://'
-            + __http_host
-            + __base + '/'
-            + (__env === 'prod' ? '' : 'app_dev.php/') + 'tareavida/get_layers_metadata/';*/
-var goalURL = get_layers_metadata;
-    getLayers(goalURL);
+    getLayersMetadata(layers_metadata);
     //esperar a las llamadas ajax de 'getWMSCapabilities' y 'getLayers' para comenzar la construcción del mapa
     $(document).one('ajaxStop', function() {
         setupMainInterface();
@@ -64,19 +58,18 @@ function getWMSCapabilities() {
  * Guardar los metadatos de las capas en la variable
  * global <b>__Layers</b>.
  * El parámetro es la URL que apunta a la función PHP que obtiene los metadatos
- * de la base de datos  *
- * @param {type} goalURL
+ * de la base de datos
  * @returns {undefined}
  */
-function getLayers(goalURL) {
+function getLayersMetadata() {
     $.ajax({
-        url: goalURL
+        url: layers_metadata
     }).done(function(data) {
         var jsonObject = getJSONObject(data);
         $.each(jsonObject, function(group, arr) {
             __Layers[group] = arr;
         });
     }).fail(function() {
-        console.log('Ocurrió un error obteniendo los metadatos de las capas', 'Url: ' + goalURL);
+        console.log('Ocurrió un error obteniendo los metadatos de las capas', 'Url: ' + layers_metadata);
     });
 }

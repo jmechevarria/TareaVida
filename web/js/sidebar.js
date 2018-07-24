@@ -91,7 +91,7 @@ $(document).ready(function() {
                     opacityBarBackground = 'transparent linear-gradient(to right, #ee9144 25%, #9ba011 25%, #9ba011 50%, #1fb07b 50%, #1fb07b 75%, #a840b3 75%, #a840b3 75%) repeat scroll 0% 0%';
                 }
 //                console.log($('input.custom-range::-moz-range-thumb'));
-               // $('input.custom-range::-moz-range-thumb').css('background', opacityBarBackground);
+                $('input.custom-range::-moz-range-thumb').css('background', opacityBarBackground);
 
 //                var opacityBarContainer = $('<div class="opacity-bar-container">');
 //                var opacityBarBackground = vector.getStyle().call(window).getFill().getColor();

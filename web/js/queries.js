@@ -231,7 +231,7 @@ $(document).ready(function() {
             if (queryAjax !== undefined)
                 queryAjax.abort();
             queryAjax = $.ajax({
-               url: afectaciones_forma_productiva
+                url: afectaciones_forma_productiva
             }).done(function(data, textStatus, jqXHR) {
                 //objeto que contiene los datos de las afectaciones, agrupado primero por municipio y luego por forma productiva.
                 var jsonObject = getJSONObject(data);

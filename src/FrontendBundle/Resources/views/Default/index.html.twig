@@ -72,14 +72,6 @@
             </ul>
         </div>
     </div>
-    {#<div id="legend">
-        <div class="suelo_afectado">
-            <span id="c1">Categor&iacute;a I</span>
-            <span id="c2">Categor&iacute;a II</span>
-            <span id="c3">Categor&iacute;a III</span>
-            <span id="c4">Categor&iacute;a IV</span>
-        </div>
-    </div>#}
 {% endblock legend %}
 
 {% block popups %}
@@ -89,10 +81,10 @@
     </div>
     <div id="feature-info-popup" class="ol-popup">
         <a href="#" id="feature-info-popup-closer" class="ol-popup-closer"></a>
-        <div id="feature-info-popup-content"></div>
+        <div id="feature-info-popup-content">
+        </div>
     </div>
-    <span id="test2"></span>
-
+    {% include 'plantillas/parcela-suelo-accordion.html.twig' %}
 {% endblock popups %}
 
 {% block info_panel %}

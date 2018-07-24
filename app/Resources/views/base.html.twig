@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>{% block title %}Geoportal | Tarea Vida{% endblock %}</title>
+    <title>{% block title %}Geoportal | Tarea Vida3{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/bootstrap-4.1.1/css/bootstrap.min.css') }}"/>
 
         <link id="loader-styles" rel="stylesheet" type="text/css" href="{{ asset ('css/loader.css') }}"/>
@@ -72,7 +72,7 @@
                                       </div>#}
                                     </div>
                                 </li>
-                                {#<li class="nav-item dropdown">
+                                <li class="nav-item dropdown">
                                     <a id="acciones" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" 
                                        aria-expanded="false">Acciones</a>
                                     <div class="dropdown-menu" aria-labelledby="acciones">
@@ -80,7 +80,7 @@
                                             Por forma productiva
                                         </a>
                                     </div>
-                                </li>#}
+                                </li>
                                 {#<li class="nav-item dropdown">
                                     <a id="admin" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" 
                                        aria-expanded="false">Administraci&oacute;n</a>
@@ -123,10 +123,7 @@
                     {% block map %}{% endblock map %}
                     {% block queries %}{% endblock queries %}
                     {% block legend %}{% endblock legend %}
-                    <span id="test"></span>
                     {% block popups %}{% endblock popups %}
-                    <span id="test3"></span>
-
                 {% endblock section %}
             </section>
             {% block info_panel %}{% endblock info_panel %}
@@ -135,7 +132,7 @@
             
             <script type="text/javascript" src="{{ asset('bundles/frontend/js/jquery-3.2.1/jquery-3.2.1.js') }}" ></script>
             <script type="text/javascript" src="{{ asset('bundles/frontend/js/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}" ></script>
-
+{#            <script type="text/javascript" src="{{ asset('bundles/frontend/css/bootstrap-4.1.1/js/bootstrap.bundle.min.js') }}" ></script>#}
             {#popper.min.js es necesario para que funcionen los tooltips de bootstrap#}
             <script type="text/javascript" src="{{ asset('bundles/frontend/js/popper.min.js') }}" ></script>
             <script type="text/javascript" src="{{ asset('bundles/frontend/css/bootstrap-4.1.1/js/bootstrap.js') }}" ></script>
@@ -171,19 +168,18 @@
             </script>
             {% block javascripts %}
                 <script type="text/javascript">
-                    var __request_scheme = '{{request_scheme}}';
+                    {#var __request_scheme = '{{request_scheme}}';
                     var __http_host = '{{http_host}}';
                     var __base = '{{base}}';
                     var __env = '{{env}}';
-		      var get_layers_metadata = '{{url('get_layers_metadata')}}';
+                    #}var layers_metadata = '{{url('layers_metadata')}}';
                     var interaccion_parcela_afectada = '{{url('interaccion_parcela_afectada')}}';
                     var gestionar_acciones = '{{url('gestionar_acciones')}}';
+                    var afectaciones_forma_productiva = '{{url('afectaciones_forma_productiva')}}';
                     var agroprod_suelos = '{{url('agroprod_suelos')}}';
                     var parcelas_afectadas_tipo_uso = '{{url('parcelas_afectadas_tipo_uso')}}';
                     var usufructuarios_afectados = '{{url('usufructuarios_afectados')}}';
-                    var afectaciones_forma_productiva = '{{url('afectaciones_forma_productiva')}}';
-                    var usufructuarios_afectados = '{{url('usufructuarios_afectados')}}';
-
+                    
                 </script>
             {% endblock %}
         {% endblock %}

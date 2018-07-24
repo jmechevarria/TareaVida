@@ -345,10 +345,6 @@
 //            list.after(tipoDeSueloAccordion);
 
             jqXHR = $.ajax({
-                /*url: __request_scheme + '://'
-                        + __http_host
-                        + __base + '/'
-                        + (__env === 'prod' ? '' : 'app_dev.php/') + 'layer/parcela_agricola_afectada/interaccion_parcela_afectada/',*/
                 url: interaccion_parcela_afectada,
                 data: {
                     poseedor: feature.get('poseedor'),
@@ -364,7 +360,7 @@
                     var cardHeader = $('<div class="card-header" id="acciones-accordion-heading">');
                     var h5 = $('<h5 class="mb-0">');
                     var button = $('<button class="btn btn-link" type="button" data-toggle="collapse" \n\
-                        data-target="#acciones-accordion-body" aria-expanded="false" aria-controls="acciones-accordion-body">Acciones de mejoramiento del suelo500</button>');
+                        data-target="#acciones-accordion-body" aria-expanded="false" aria-controls="acciones-accordion-body">');
                     var accionesAccordionBody = $('<div id="acciones-accordion-body" class="collapse" aria-labelledby="acciones-accordion-heading" data-parent="#acciones-accordion">');
                     var cardBody = $('<div class="card-body">');
                     var listaAcciones = $('<ul id="lista-acciones" class="list-unstyled">');
@@ -374,73 +370,26 @@
                     //en esta variable se guardarán los cambios realizados a la lista de acciones para ser actualizados
                     //en la base de datos cuando el usuario presione el botón 'Guardar cambios'
 //                    var accionesActualizadas = {};
+                    button.text('Acciones de mejoramiento del suelo (' + jsonObject['acciones'].length + ')');
                     $.each(jsonObject['acciones'], function(i, accion) {
                         var li = $('<li>');
-//                            var checkIcon = $('<i class="fa fa-square-o" data-toggle="tooltip" data-placement="left" title="Por hacer"></i>');
-//                            if (accion['hecho']) {
-//                                li.addClass('hecho');
-//                                checkIcon.toggleClass('fa-square-o fa-check-square').attr('title', 'Hecho');
-//                            }
-
-//                            checkIcon.click(function() {
-//                                $(this).toggleClass('fa-square-o fa-check-square');
-//                                if ($(this).hasClass('fa-square-o')) {
-//                                    $(this).attr('data-original-title', 'Por hacer');
-//                                }
-//                                else {
-//                                    $(this).attr('data-original-title', 'Hecho');
-//                                }
-//                                $(this).tooltip('hide');
-//                                $(this).tooltip('show');
-//                                accion['hecho'] = !accion['hecho'];
-//                                li.toggleClass('hecho');
-//                            });
                         listaAcciones.append(li
-//                                    .append(checkIcon)
                                 .append('&nbsp;').append(accion['nombre']));
                     });
-
-//                        listaAcciones.find('i.fa').tooltip();
-
-//                        var contenedorGuardarCambios = $('<div style="text-align: right;">');
-//                        listaAcciones.after(contenedorGuardarCambios);
-//                        var guardarCambios = $('<button class="btn btn-success">Guardar cambios</button>');
-//                        contenedorGuardarCambios.append(guardarCambios);
-//                        guardarCambios.click(function() {
-//                            var savingSpinner = $('<i class="fa fa-spinner fa-spin"></i>');
-//                            $(this).empty();
-//                            $(this).append(savingSpinner).append('&nbsp;').append('Guardando, por favor espere...');
-////                            var data = jsonObject['acciones'];
-//
-//                            $.ajax({
-//                                url: __request_scheme + '://'
-//                                        + __http_host
-//                                        + __base + '/'
-//                                        + (__env === 'prod' ? '' : 'app_dev.php/') + 'layer/parcela_agricola_afectada/actualizar_acciones/',
-//                                method: 'POST',
-//                                data: {
-//                                    acciones: jsonObject['acciones']
-//                                }
-//                            })
-//                        });
                 }
                 //quitar spinner
                 spinner.remove();
             });
         } else if (layerName === 'suelo_afectado') {
-            content.append(list);
+            content.empty().append($('#parcela-suelo-popup-content').clone().show());
             var spinner = $('<label style="color: lightgreen"><i class="fa fa-spinner fa-spin"></i> Obteniendo información, por favor espere...</label>');
             content.prepend(spinner);
+            var list = content.find('ul.atributos');
             list.append('<li>Tipo: ' + feature.get('tipos') + '</li>');
             list.append('<li>Subtipo: ' + feature.get('subtipos') + '</li>');
             var roman = categoryToRoman(feature.get('cat_gral10_cult'));
             list.append('<li>Categoría: ' + roman + '</li>');
             list.append('<li>Área: ' + parseFloat(feature.get('area')).toFixed(2) + ' ha</li>');
-            var gestionarAccionesURL = __request_scheme + '://'
-                    + __http_host
-                    + __base + '/'
-                    + (__env === 'prod' ? '' : 'app_dev.php/') + 'layer/suelo_afectado/gestionar_acciones/';
-console.log(gestionar_acciones);
             jqXHR = $.ajax({
                 url: gestionar_acciones,
                 data: {
@@ -449,58 +398,52 @@ console.log(gestionar_acciones);
             }).done(function(data, textStatus, jqXHR) {
                 var jsonObject = getJSONObject(data);
                 if (jsonObject.length > 0) {
-                    var accionesAccordion = $('<div class="accordion" id="acciones-accordion">');
-                    var card = $('<div class="card">');
-                    var cardHeader = $('<div class="card-header" id="acciones-accordion-heading">');
-                    var h5 = $('<h5 class="mb-0">');
-                    var button = $('<button class="btn btn-link" type="button" data-toggle="collapse" \n\
-                        data-target="#acciones-accordion-body" aria-expanded="false" aria-controls="acciones-accordion-body">Acciones de mejoramiento del suelo</button>');
-                    var accionesAccordionBody = $('<div id="acciones-accordion-body" class="collapse" aria-labelledby="acciones-accordion-heading" data-parent="#acciones-accordion">');
-                    var cardBody = $('<div class="card-body">');
-                    var listaAcciones = $('<ul id="lista-acciones" class="list-unstyled">');
-                    accionesAccordion.append(card.append(cardHeader.append(h5.append(button))).append(accionesAccordionBody.append(cardBody.append(listaAcciones))));
-                    content.append(accionesAccordion);
-                    var contenedorGuardarCambios = $('<div style="text-align: right;">');
-                    listaAcciones.after(contenedorGuardarCambios);
-                    var guardarCambios = $('<button class="btn btn-success">Guardar cambios</button>');
-                    contenedorGuardarCambios.append(guardarCambios);
+                    var accionesAccordion = content.find('div.accordion');
+                    var button = content.find('div.card-header button');
+                    button.text('Acciones de mejoramiento del suelo (' + jsonObject.length + ')');
+                    var tablaAcciones = $('<table id="tabla-acciones" class="table">');
+                    var tbodyAcciones = tablaAcciones.children('tbody');
+                    var guardarCambios = content.find('div.opciones button');
 
-                    //en esta variable se guardarán los cambios realizados a la lista de acciones para ser actualizados
-                    //en la base de datos cuando el usuario presione el botón 'Guardar cambios'
+//                    //en esta variable se guardarán los cambios realizados a la lista de acciones para ser actualizados
+//                    //en la base de datos cuando el usuario presione el botón 'Guardar cambios'
                     var accionesActualizadas = {};
-                    var cantidadHechas = 0;
+                    var hechas = 0;
+
+                    var masterCheckbox = $('#master-checkbox');
+                    var checkboxAcciones = [];
+
                     $.each(jsonObject, function(i, accion) {
                         accionesActualizadas[accion['id']] = accion['hecho'];
-                        var li = $('<li>');
-                        var checkIcon = $('<i class="fa fa-square-o" data-toggle="tooltip" data-placement="left" title="Por hacer"></i>');
+                        var tr = $('<tr>');
+                        var checkboxAccion = $('<i class="fa fa-square-o accion" data-toggle="tooltip" title="Por hacer"></i>');
+                        var eliminarAccion = $('<i class="fa fa-close" data-toggle="tooltip" title="Por hacer"></i>');
                         if (accion['hecho']) {
-                            li.addClass('hecho');
-                            checkIcon.toggleClass('fa-square-o fa-check-square').attr('title', 'Hecho');
-                            cantidadHechas++;
+                            tr.addClass('hecho');
+                            checkboxAccion.toggleClass('fa-square-o fa-check-square').attr('title', 'Hecho');
+                            hechas++;
                         }
-
-                        checkIcon.click(function(e) {
+//
+                        checkboxAccion.click(function(e) {
                             $(this).toggleClass('fa-square-o fa-check-square');
                             if ($(this).hasClass('fa-square-o')) {
                                 $(this).attr('data-original-title', 'Por hacer');
-                                cantidadHechas--;
+                                hechas--;
                             }
                             else {
                                 $(this).attr('data-original-title', 'Hecho');
-                                cantidadHechas++;
-
+                                hechas++;
                             }
 
-                            if (listaAcciones.find('li').length === cantidadHechas + 1)
-                                masterCheckbox.attr('class', 'fa fa-check-square');
-                            else
-                                masterCheckbox.attr('class', 'fa fa-square-o');
-
                             if (e.originalEvent) {
+                                if (tablaAcciones.find('i.accion').length === hechas)
+                                    masterCheckbox.attr('class', 'fa fa-check-square');
+                                else
+                                    masterCheckbox.attr('class', 'fa fa-square-o');
                                 $(this).tooltip('hide');
                                 $(this).tooltip('show');
                             }
-                            li.toggleClass('hecho');
+                            tr.toggleClass('hecho');
 
                             accionesActualizadas[accion['id']] = !accionesActualizadas[accion['id']];
 
@@ -508,56 +451,57 @@ console.log(gestionar_acciones);
                             guardarCambios.text('Guardar cambios');
                             guardarCambios.prop('disabled', false);
                         });
-
-                        listaAcciones.append(li
-                                .append(checkIcon)
-                                .append('&nbsp;').append(accion['nombre']));
+//
+                        tbodyAcciones.append(tr
+                                .append($('<td>').append(accion['nombre']))
+                                .append($('<td>').append(checkboxAccion))
+                                .append($('<td>').append(eliminarAccion))
+                                );
+                        checkboxAcciones.push(checkboxAccion);
                     });
 
-                    var masterCheckbox = $('<i id="master-checkbox" class="fa fa-square-o">');
-                    listaAcciones.append($('<li>').append(masterCheckbox));
-                    var acciones = listaAcciones.find('li i.fa');
-                    
-                    if (acciones.length === cantidadHechas + 1)
-                        masterCheckbox.attr('class', 'fa fa-check-square');
-
-                    masterCheckbox.click(function() {
-                        $(this).toggleClass('fa-square-o fa-check-square');
-
-                        if ($(this).hasClass('fa-square-o'))
-                            acciones.filter('i.fa-check-square').each(function() {
-                                $(this).click();
-                            });
-                        else
-                            acciones.filter('i.fa-square-o').each(function() {
-                                $(this).click();
-                            });
-                    });
-                    listaAcciones.find('i.fa').tooltip();
-
+////                    console.log(iconosAcciones);
+//                    if (checkboxAcciones.length === hechas)
+//                        masterCheckbox.attr('class', 'fa fa-check-square');
+//
+//                    masterCheckbox.click(function() {
+//                        $(this).toggleClass('fa-square-o fa-check-square');
+//
+//                        if ($(this).hasClass('fa-square-o'))
+//                            checkboxAcciones.filter('i.fa-check-square').each(function() {
+//                                $(this).click();
+//                            });
+//                        else
+//                            checkboxAcciones.filter('i.fa-square-o').each(function() {
+//                                $(this).click();
+//                            });
+//                    });
+//
+//                    tablaAcciones.find('i.accion').tooltip();
+//
                     guardarCambios.click(function() {
-                        var savingSpinner = $('<i class="fa fa-spinner fa-spin"></i>');
-                        var $button = $(this);
-                        $button.prop('disabled', true);
-                        $button.empty();
-                        $button.append(savingSpinner).append('&nbsp;').append('Guardando, por favor espere...');
-                        $.ajax({
-                            url: gestionar_acciones,
-                            method: 'POST',
-                            data: {
-                                suelo: feature.get('gid'),
-                                acciones: accionesActualizadas
-                            }
-                        }).done(function() {
-                            $button.empty();
-                            $button.text('Acciones actualizadas');
-                        }).always(function() {
-                            //                            $button.prop('disabled', false);
-                        });
+//                        var savingSpinner = $('<i class="fa fa-spinner fa-spin"></i>');
+//                        var $button = $(this);
+//                        $button.prop('disabled', true);
+//                        $button.empty();
+//                        $button.append(savingSpinner).append('&nbsp;').append('Guardando, por favor espere...');
+//                        $.ajax({
+//                            url: gestionar_acciones,
+//                            method: 'POST',
+//                            data: {
+//                                suelo: feature.get('gid'),
+//                                acciones: accionesActualizadas
+//                            }
+//                        }).done(function() {
+//                            $button.empty();
+//                            $button.text('Acciones actualizadas');
+//                        }).always(function() {
+//                            //                            $button.prop('disabled', false);
+//                        });
                     });
                 }
-                //quitar spinner
-                spinner.remove();
+//                //quitar spinner
+//                spinner.remove();
             });
         }
         return jqXHR;

@@ -132,11 +132,11 @@ function populateMap(layerCollection) {
         name: 'tms',
         projection: 'EPSG:4326',
         source: new ol.source.XYZ({
-            url: '/geocache/tms/vesat/{z}/{x}/{-y}.jpg'
+            url: '/projects/geocache/tms/vesat/{z}/{x}/{-y}.jpg'
         }),
         zIndex: 0
     });
-    layerCollection.push(tms);
+//    layerCollection.push(tms);
 
     //Añadir el resto de las capas
     $.each(__Layers, function(rootName, children) {
@@ -296,7 +296,7 @@ function categoryToRoman(cat) {
         var url = getFeatureURL + params['LAYERS'] +
 //                params['CQLFilter'] +
                 '&outputFormat=GML2';
-//        if (vectorName === 'parcela_agricola_afectada' || vectorName === 'suelo_afectado') {
+        if (vectorName === 'parcela_agricola_afectada' || vectorName === 'suelo_afectado') {
             var doneFunction = function(response) {
                 results = parser.readFeatures(response);
                 $.each(results, function(i, v) {
@@ -322,7 +322,7 @@ function categoryToRoman(cat) {
                             $.ajax(this).done(doneFunction);
                         });
             }
-        //}
+        }
 
 //            tiles[params['LAYERS']] = tile;
 

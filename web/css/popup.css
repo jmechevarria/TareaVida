@@ -100,11 +100,11 @@
 }
 /*GRÁFICA DE COLORES DE TIPOS DE SUELO - FIN*/
 
-/*ACCIONES ACCORDION*/
 #feature-info-popup-content div.collapse, #feature-info-popup-content div.collapsing{
     color: black
 }
 
+/*ACCORDION*/
 #feature-info-popup-content div.card-header{
     padding: 0;
     background: white
@@ -119,23 +119,31 @@
     padding: 0 .5rem
 }
 
-#feature-info-popup-content #lista-acciones li.hecho{
+#feature-info-popup th, #feature-info-popup td {
+    padding: 0 .1rem;
+    border: none;
+}
+/*ACCORDION - FIN*/
+
+/*ACCIONES ACCORDION*/
+#feature-info-popup-content #acciones-accordion div.opciones{
+    display: none;
+    border-top: 2px solid rgb(99, 36, 36);
+}
+
+#feature-info-popup-content #acciones-accordion div.opciones div:first-child > div{
+    padding: 0px 0.2rem;
+}
+
+#feature-info-popup-content #tabla-acciones tr.hecho{
     color: green;
     text-decoration-line: line-through;
-
 }
 
-#feature-info-popup-content #lista-acciones li i.fa{
-    cursor: pointer;
-    visibility: hidden
+#feature-info-popup-content #tabla-acciones i.fa{
+    cursor: default;
+    text-align: center
 }
-
-#feature-info-popup-content #lista-acciones li.hecho i.fa,
-#feature-info-popup-content #lista-acciones li:hover i.fa,
-#feature-info-popup-content #lista-acciones #master-checkbox{
-    visibility: visible
-}
-
 
 /*ACCIONES ACCORDION - FIN*/
 

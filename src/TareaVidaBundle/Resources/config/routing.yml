@@ -2,8 +2,8 @@ tareavida_homepage:
     path:     /
     defaults: { _controller: TareaVidaBundle:Default:index }
 
-get_layers_metadata:
-    path:     /get_layers_metadata/
+layers_metadata:
+    path:     /layers_metadata/
     defaults: { _controller: TareaVidaBundle:Default:getLayersMetadata }
 
 tareavida_layer:

@@ -2,6 +2,14 @@ body{
     overflow: hidden
 }
 
+div.row{
+    margin: 0 !important
+}
+
+div[class^="col-"]{
+    padding: 0 !important
+}
+
 #main-container {
     position: relative;
     height: calc(100vh - 50px);
