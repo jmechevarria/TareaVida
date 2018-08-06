@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/projects/TareaVida/src/LayerBundle/Repository/AccionSueloRepository.php</file>
-            <file>file:/C:/xampp/htdocs/projects/TareaVida/src/LayerBundle/Controller/ParcelaAgricolaAfectadaController.php</file>
-            <file>file:/C:/xampp/htdocs/projects/TareaVida/src/LayerBundle/Resources/config/routing/sueloafectado.yml</file>
-            <file>file:/C:/xampp/htdocs/projects/TareaVida/web/css/popup.css</file>
-            <file>file:/C:/xampp/htdocs/projects/TareaVida/web/js/mapfunctions.js</file>
-            <file>file:/C:/xampp/htdocs/projects/TareaVida/src/LayerBundle/Entity/AccionSuelo.php</file>
-            <file>file:/C:/xampp/htdocs/projects/TareaVida/src/LayerBundle/Controller/SueloAfectadoController.php</file>
-            <file>file:/C:/xampp/htdocs/projects/TareaVida/web/js/interactions.js</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

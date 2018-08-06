@@ -65,8 +65,8 @@ function getLayersMetadata() {
     $.ajax({
         url: layers_metadata
     }).done(function(data) {
-        var jsonObject = getJSONObject(data);
-        $.each(jsonObject, function(group, arr) {
+        data = getJSObject(data);
+        $.each(data, function(group, arr) {
             __Layers[group] = arr;
         });
     }).fail(function() {

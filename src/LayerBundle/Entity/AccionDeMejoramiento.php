@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AccionDeMejoramiento
  *
  * @ORM\Table(name="accion_de_mejoramiento")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="LayerBundle\Repository\AccionDeMejoramientoRepository")
  */
 class AccionDeMejoramiento {
 

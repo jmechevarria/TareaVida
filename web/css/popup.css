@@ -66,7 +66,7 @@
     width: -ms-max-content;
     width: -o-max-content;
     width: max-content;
-    max-width: 450px;
+    max-width: 400px;
 }
 
 /*GRÁFICA DE COLORES DE TIPOS DE SUELO*/
@@ -120,23 +120,29 @@
 }
 
 #feature-info-popup th, #feature-info-popup td {
-    padding: 0 .1rem;
+    padding: 0 .2rem;
     border: none;
+    vertical-align: middle
 }
 /*ACCORDION - FIN*/
 
 /*ACCIONES ACCORDION*/
-#feature-info-popup-content #acciones-accordion div.opciones{
-    display: none;
+#feature-info-popup-content div.accordion div.opciones{
+    /*display: none;*/
     border-top: 2px solid rgb(99, 36, 36);
 }
 
-#feature-info-popup-content #acciones-accordion div.opciones div:first-child > div{
-    padding: 0px 0.2rem;
+#feature-info-popup-content div.accordion div.opciones i.fa{
+    width: 12px
 }
 
 #feature-info-popup-content #tabla-acciones tr.hecho{
     color: green;
+    text-decoration-line: line-through;
+}
+
+#feature-info-popup-content #tabla-acciones tr.eliminar td:first-child{
+    color: rgb(213, 36, 36);
     text-decoration-line: line-through;
 }
 
@@ -145,5 +151,12 @@
     text-align: center
 }
 
+#feature-info-popup-content #tabla-acciones i.fa-remove{
+    color: #818181
+}
+
+#feature-info-popup-content #tabla-acciones tr.eliminar i.fa-remove{
+    color: rgb(213, 36, 36)
+}
 /*ACCIONES ACCORDION - FIN*/
 

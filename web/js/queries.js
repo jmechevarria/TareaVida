@@ -34,7 +34,7 @@ $(document).ready(function() {
             }).done(function(data) {
                 $('#feature-info-popup-closer').click();
                 //objeto JS con el área de cada categoría agrupadas por municipio
-                var jsonObject = getJSONObject(data);
+                data = getJSObject(data);
                 //cerrar el que estaba abierto
                 close.click();
                 var tabs = $('<ul class="nav nav-tabs">');
@@ -119,7 +119,7 @@ $(document).ready(function() {
                 //jsonObject[1] contiene un arreglo que relaciona cada tipo de uso con las parcelas
                 //que corresponden a dicho tipo de uso. Así se muestran las parcelas en el mapa cada vez que
                 //se hace click sobre un tipo de uso en la tabla
-                var jsonObject = getJSONObject(data);
+                data = getJSObject(data);
                 //cerrar el que estaba abierto
                 close.click();
                 var tabs = $('<ul class="nav nav-tabs">');
@@ -198,7 +198,7 @@ $(document).ready(function() {
             queryAjax = $.ajax({
                 url: usufructuarios_afectados
             }).done(function(data, textStatus, jqXHR) {
-                var jsonObject = getJSONObject(data);
+                data = getJSObject(data);
                 //cerrar el que estaba abierto
                 close.click();
                 var tabs = $('<ul class="nav nav-tabs">');
@@ -234,7 +234,7 @@ $(document).ready(function() {
                 url: afectaciones_forma_productiva
             }).done(function(data, textStatus, jqXHR) {
                 //objeto que contiene los datos de las afectaciones, agrupado primero por municipio y luego por forma productiva.
-                var jsonObject = getJSONObject(data);
+                data = getJSObject(data);
                 //cerrar el que estaba abierto
                 close.click();
                 //Esta vista es diferente (más compleja) que las anteriores. Tenemos dos filas de tabs horizontales; una

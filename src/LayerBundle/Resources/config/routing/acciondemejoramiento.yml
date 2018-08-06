@@ -1,0 +1,29 @@
+acciondemejoramiento_index:
+    path:     /
+    defaults: { _controller: "LayerBundle:AccionDeMejoramiento:index" }
+    methods:  GET
+
+acciondemejoramiento_show:
+    path:     /{id}/show
+    defaults: { _controller: "LayerBundle:AccionDeMejoramiento:show" }
+    methods:  GET
+
+acciondemejoramiento_new:
+    path:     /new
+    defaults: { _controller: "LayerBundle:AccionDeMejoramiento:new" }
+    methods:  [GET, POST]
+
+acciondemejoramiento_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LayerBundle:AccionDeMejoramiento:edit" }
+    methods:  [GET, POST]
+
+acciondemejoramiento_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LayerBundle:AccionDeMejoramiento:delete" }
+    methods:  DELETE
+
+acciones_disponibles:
+    path:     /acciones_disponibles/
+    defaults: { _controller: "LayerBundle:AccionDeMejoramiento:accionesDisponibles" }
+    methods:  GET

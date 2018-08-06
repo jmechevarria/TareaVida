@@ -1,0 +1,4 @@
+asociar_accion_suelo:
+    path:     /asociar_accion_suelo/
+    defaults: { _controller: "LayerBundle:AccionSuelo:asociarAccionSuelo" }
+    methods:  GET

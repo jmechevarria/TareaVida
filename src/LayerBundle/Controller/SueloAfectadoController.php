@@ -166,40 +166,36 @@ class SueloAfectadoController extends Controller {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function gestionarAccionesAction(Request $r) {
-        $em = $this->getDoctrine()->getManager();
-        if ($r->getMethod() === 'POST') {
-            $asociaciones = $em->getRepository('LayerBundle:AccionSuelo')->findBy(array('suelo' => $r->get('suelo')));
-            $f = 0;
-            $t = 0;
-            foreach ($asociaciones as $a) {
-                if ($r->get('acciones')[$a->getAccion()->getId()] === 'false')
-                    $a->setHecho(false);
-                else
-                    $a->setHecho(true);
-//                if ($a->getHecho())
-//                    $t++;
-//                else
-//                    $f++;
-//                var_dump($r->get('acciones')[$a->getAccion()->getId()]);
-//                var_dump($a->getAccion()->getNombre() . ' ' . $a->getHecho());
+        if ($r->isXmlHttpRequest()) {
+            $em = $this->getDoctrine()->getManager();
+            if ($r->getMethod() === 'POST') {
+                $asociaciones = $em->getRepository('LayerBundle:AccionSuelo')->findBy(array('suelo' => $r->get('suelo')));
+
+//            $removed = array();
+                $acciones = $r->get('acciones');
+                foreach ($asociaciones as $a) {
+                    $accion_id = $a->getAccion()->getId();
+                    if ($acciones[$accion_id][1] === 'true') {
+                        $em->remove($a);
+//                        var_dump($acciones);
+                        unset($acciones[$accion_id]);
+//                        var_dump($acciones);
+//                        die();
+                    } else if ($acciones[$accion_id][0] === 'true')
+                        $a->setHecho(true);
+                    else
+                        $a->setHecho(false);
+                }
+
+                $em->flush();
+
+                return new \Symfony\Component\HttpFoundation\Response(json_encode($acciones));
+            } else {
+                $acciones = $em->getRepository('LayerBundle:AccionSuelo')->buscarAcciones($r->get('suelo'))->getQuery()->getResult();
+
+                return new \Symfony\Component\HttpFoundation\Response(json_encode($acciones));
             }
-//            var_dump($t);
-//            var_dump($f);
-//            die();
-//            die();
-//
-            $em->flush();
-
-            return new \Symfony\Component\HttpFoundation\Response();
-
-//            $em->getRepository('LayerBundle:AccionSuelo')->actualizarAcciones($r->get('suelo'), $r->get(acciones));
-        } else {
-            $acciones = $em->getRepository('LayerBundle:AccionSuelo')->buscarAcciones($r->get('suelo'))->getQuery()->getResult();
-
-            return new \Symfony\Component\HttpFoundation\Response(json_encode($acciones));
         }
-//        var_dump($acciones);
-//        die();
     }
 
 }

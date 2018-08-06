@@ -2,14 +2,22 @@ layer_homepage:
     path:     /
     defaults: { _controller: LayerBundle:Default:index }
 
-LayerBundle_sueloafectado:
+layer_sueloafectado:
     resource: "@LayerBundle/Resources/config/routing/sueloafectado.yml"
     prefix: /suelo_afectado/
 
-LayerBundle_parcelaagricolaafectada:
+layer_parcelaagricolaafectada:
     resource: "@LayerBundle/Resources/config/routing/parcelaagricolaafectada.yml"
     prefix: /parcela_agricola_afectada/
 
-LayerBundle_ascensonmm:
+layer_ascensonmm:
     resource: "@LayerBundle/Resources/config/routing/ascensonmm.yml"
     prefix:   /ascenso_nmm/
+
+layer_acciondemejoramiento:
+    resource: "@LayerBundle/Resources/config/routing/acciondemejoramiento.yml"
+    prefix:   /acciondemejoramiento/
+
+layer_accionsuelo:
+    resource: "@LayerBundle/Resources/config/routing/accionsuelo.yml"
+    prefix:   /accionsuelo/

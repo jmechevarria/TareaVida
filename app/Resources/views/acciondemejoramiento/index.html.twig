@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Acciondemejoramientos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for accionDeMejoramiento in accionDeMejoramientos %}
+            <tr>
+                <td><a href="{{ path('acciondemejoramiento_show', { 'id': accionDeMejoramiento.id }) }}">{{ accionDeMejoramiento.id }}</a></td>
+                <td>{{ accionDeMejoramiento.nombre }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('acciondemejoramiento_show', { 'id': accionDeMejoramiento.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('acciondemejoramiento_edit', { 'id': accionDeMejoramiento.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('acciondemejoramiento_new') }}">Create a new accionDeMejoramiento</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>{% block title %}Geoportal | Tarea Vida33{% endblock %}</title>
+    <title>{% block title %}Geoportal | Tarea Vida{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset ('bundles/frontend/css/bootstrap-4.1.1/css/bootstrap.min.css') }}"/>
 
         <link id="loader-styles" rel="stylesheet" type="text/css" href="{{ asset ('css/loader.css') }}"/>
@@ -179,6 +179,8 @@
                     var agroprod_suelos = '{{url('agroprod_suelos')}}';
                     var parcelas_afectadas_tipo_uso = '{{url('parcelas_afectadas_tipo_uso')}}';
                     var usufructuarios_afectados = '{{url('usufructuarios_afectados')}}';
+                    var acciones_disponibles = '{{url('acciones_disponibles')}}';
+                    var asociar_accion_suelo = '{{url('asociar_accion_suelo')}}';
                     
                 </script>
             {% endblock %}

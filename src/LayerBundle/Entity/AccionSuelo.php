@@ -33,13 +33,17 @@ class AccionSuelo {
      */
     private $hecho;
 
+    public function __construct() {
+        $this->hecho = false;
+    }
+
     /**
      * Set hecho
      *
      * @param boolean $hecho
      * @return AccionSuelo
      */
-    public function setHecho($hecho) {
+    public function setHecho($hecho = false) {
         $this->hecho = $hecho;
 
         return $this;
