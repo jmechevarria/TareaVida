@@ -351,7 +351,7 @@
                     suelos_intersectados: suelosIntersectados
                 }
             }).done(function(responseData) {
-                responseData = getJSObject(responseData);
+                responseData = getJSArray(responseData);
                 list.children('li:first').before('<li>Poseedor: ' + responseData['poseedor'] + '</li>');
 
                 if (responseData['acciones'].length > 0) {
@@ -396,11 +396,14 @@
                     suelo: feature.get('gid')
                 }
             }).done(function(responseData) {
-                responseData = getJSObject(responseData);
+                responseData = getJSArray(responseData);
+                var accionesAsociadas = responseData[0];
+                var accionesDisponibles = responseData[1];
                 var accionesAccordion = content.find('div.accordion');
                 accionesAccordion.show();
-                var button = content.find('div.card-header button');
-                button.text('Acciones de mejoramiento del suelo (' + responseData.length + ')');
+                var tituloAccordion = content.find('div.card-header button');
+                var cantidadAcciones = $('<span>' + accionesAsociadas.length + '</span>');
+                tituloAccordion.append('Acciones de mejoramiento del suelo (').append(cantidadAcciones).append(')');
                 var tablaAcciones = $('#tabla-acciones');
                 var tbodyAcciones = tablaAcciones.children('tbody');
                 var guardarCambios = content.find('div.opciones button');
@@ -412,36 +415,32 @@
 //                var acciones = [];
 
                 //recorrer cada acción y conformar el contenido de la tabla
-                $.each(responseData, function(i, accion) {
+                $.each(accionesAsociadas, function(i, accion) {
                     //inicializar el objeto con los datos de las acciones
                     //este objeto se actualizará con los cambios realizados por el usuario durante todo el ciclo de vida del popup
                     //para utilizarlo en el momento de guardar
-                    accionesActualizadas[accion['id']] = [accion['hecho'], false, false]; //[hecho, eliminar, nueva]
-                    var tr = $('<tr class="accion">');
+                    accionesActualizadas[accion['id']] = [accion['hecho']];
+                    var tr = $('<tr id="' + accion['id'] + '" class="accion">');
                     var checkboxAccion = $('<i class="fa fa-square-o">');
                     var eliminarAccion = $('<i class="fa fa-remove">');
                     if (accion['hecho']) {
                         tr.addClass('hecho');
                         checkboxAccion.toggleClass('fa-square-o fa-check-square');
-//                        hechas++;
                     }
 
-                    checkboxAccionClick(checkboxAccion, tr, accion);
-                    eliminarAccionClick(eliminarAccion, tr, accion);
+                    checkboxAccionClick(checkboxAccion, accion);
+                    eliminarAccionClick(eliminarAccion, accion);
 
                     tbodyAcciones.append(tr
                             .append($('<td>').append(accion['nombre']))
                             .append($('<td>').append(checkboxAccion))
                             .append($('<td>').append(eliminarAccion))
                             );
-//                    acciones.push(checkboxAccion);
-//                    acciones.push(tr);
                 });
 
                 var marcarTodas = $('#marcar-todas');
 
                 //si todas las acciones están hechas
-//                if (Object.keys(accionesActualizadas).length === hechas) {
                 if (todasHechas()) {
                     marcarTodas.attr('data-original-title', 'Desmarcar todas');
                     marcarTodas.attr('class', 'fa fa-check-square');
@@ -459,64 +458,39 @@
                     }
                 });
 
-                var nuevaAccion = $('<i class="fa fa-plus-circle" data-toggle="tooltip" data-placement="bottom" title="Incluir nueva acción">');
-                tbodyAcciones.append($('<tr>').append($('<td style="text-align: center">').append(nuevaAccion)));
-                //evento .click para mostrar la lista de acciones disponibles
+                var accionesDisponiblesSelect = $('#acciones-disponibles');
+                var nuevaAccion = $('#nueva-accion');
+
+                $.each(accionesDisponibles, function(i, accion) {
+                    accionesDisponiblesSelect.append('<option value="' + accion['id'] + '">' + accion['nombre'] + '</option>');
+                });
+
                 nuevaAccion.click(function() {
-                    nuevaAccion.toggleClass('fa-spinner fa-spin fa-plus-circle');
-                    nuevaAccion.tooltip('disable');
-                    //buscar en el servidor las acciones disponibles para esta parcela de suelo
-                    $.ajax({
-                        url: acciones_disponibles,
-                        data: {
-                            suelo_id: feature.get('gid')
-                        }
-                    }).done(function(responseData) {
-                        responseData = getJSObject(responseData);
-                        var accionesDisponibles = $('<select class="form-control">');
-                        var guardarNuevaAccion = $('<button class="btn btn-primary"><i class="fa fa-check">');
-                        nuevaAccion.hide().closest('td').append(accionesDisponibles).after($('<td colspan="2">').append(guardarNuevaAccion));
-                        $.each(responseData, function(i, accion) {
-                            accionesDisponibles.append('<option value="' + accion['id'] + '">' + accion['nombre'] + '</option>');
-                        });
-                        //evento .click para asociar la acción seleccionada a la parcela de suelo
-                        guardarNuevaAccion.click(function() {
-                            var nuevaAccionID = accionesDisponibles.val();
-                            var nuevaAccionNombre = accionesDisponibles.children(':selected').text();
-                            //quitar la lista desplegable de acciones
-                            accionesDisponibles.remove();
+                    if (accionesDisponiblesSelect.children().length) {
+                        var nuevaAccionID = accionesDisponiblesSelect.val();
+                        var accionSeleccionada = accionesDisponiblesSelect.children(':selected');
+                        var nuevaAccionNombre = accionSeleccionada.text();
+                        var checkboxNuevaAccion = $('<i class="fa fa-square-o">');
+                        var eliminarNuevaAccion = $('<i class="fa fa-remove">');
+                        var nuevaFila = $('<tr id="' + nuevaAccionID + '" class="accion">')
+                                .append($('<td>').append(nuevaAccionNombre))
+                                .append($('<td>').append(checkboxNuevaAccion))
+                                .append($('<td>').append(eliminarNuevaAccion))
+                                ;
+                        checkboxAccionClick(checkboxNuevaAccion, {'id': nuevaAccionID});
+                        eliminarAccionClick(eliminarNuevaAccion, {'id': nuevaAccionID});
+                        tbodyAcciones.append(nuevaFila);
+                        accionSeleccionada.remove();
+                        cantidadAcciones.text(parseInt(cantidadAcciones.text()) + 1);
+                        marcarTodas
+                                .removeClass('fa-check-square').addClass('fa-square-o')
+                                .attr('data-original-title', 'Marcar todas');
 
-                            //mostrar el ícono '.fa-plus-circle' y quitar el <td> que contiene el botón 'guardarNuevaAccion'
-                            nuevaAccion.show().closest('td').next().remove();
-
-                            //asociar en la base de datos 'accion_id' y 'suelo_id'
-                            $.ajax({
-                                url: asociar_accion_suelo,
-                                data: {
-                                    accion_id: nuevaAccionID,
-                                    suelo_id: feature.get('gid')
-                                }
-                            }).done(function(responseData) {
-//                                data = getJSObject(data);
-                                var checkboxNuevaAccion = $('<i class="fa fa-square-o">');
-                                var eliminarNuevaAccion = $('<i class="fa fa-remove">');
-                                var nuevaAccionFila = $('<tr class="accion">')
-                                        .append($('<td>').append(nuevaAccionNombre))
-                                        .append($('<td>').append(checkboxNuevaAccion))
-                                        .append($('<td>').append(eliminarNuevaAccion))
-                                        ;
-                                accionesActualizadas[nuevaAccionID] = [false, false, true];
-                                checkboxAccionClick(checkboxNuevaAccion, nuevaAccionFila, {'id': nuevaAccionID});
-                                eliminarAccionClick(eliminarNuevaAccion, nuevaAccionFila, {'id': nuevaAccionID});
-//                                acciones.push(checkboxNuevaAccion);
-//                                acciones.push(nuevaAccionFila);
-                                nuevaAccion.closest('tr').before(nuevaAccionFila);
-                            }).always(function() {
-                                nuevaAccion.toggleClass('fa-spinner fa-spin fa-plus-circle');
-                                nuevaAccion.tooltip('enable');
-                            });
-                        });
-                    });
+                        guardarCambios.empty();
+                        guardarCambios.text('Guardar cambios');
+                        guardarCambios.prop('disabled', false);
+                        accionesActualizadas[nuevaAccionID] = [false];
+                    }
                 });
 
                 //evento .click para actualizar en la base de datos y la vista los cambios realizados
@@ -534,9 +508,8 @@
                             acciones: accionesActualizadas
                         }
                     }).done(function(responseData) {
-                        //acciones eliminadas
-//                        responseData = getJSObject(responseData);
-                        $('tr.eliminar').remove();
+//                        acciones eliminadas
+//                        responseData = getJSArray(responseData);
 //                        hechas = $('tr.hecho:not(.eliminar)').length;
                         guardarCambios.empty();
                         guardarCambios.text('Acciones actualizadas');
@@ -551,11 +524,10 @@
                  * Evento .click de cada checkbox que marca la acción como hecho o por hacer
                  *
                  * @param {type} checkboxAccion
-                 * @param {type} tr
                  * @param {type} accion
                  * @returns {undefined}
                  */
-                function checkboxAccionClick(checkboxAccion, tr, accion) {
+                function checkboxAccionClick(checkboxAccion, accion) {
                     checkboxAccion.click(function(e) {
                         $(this).toggleClass('fa-square-o fa-check-square');
                         if ($(this).hasClass('fa-square-o')) {
@@ -564,11 +536,10 @@
 //                            hechas++;
                         }
 
-                        tr.toggleClass('hecho');
+                        checkboxAccion.closest('tr').toggleClass('hecho');
                         accionesActualizadas[accion['id']][0] = !accionesActualizadas[accion['id']][0];
 
                         if (e.originalEvent) {
-//                            if (Object.keys(accionesActualizadas).length === hechas) {
                             if (todasHechas()) {
                                 marcarTodas.attr('data-original-title', 'Desmarcar todas');
                                 marcarTodas.attr('class', 'fa fa-check-square');
@@ -588,15 +559,20 @@
                  * Evento .click que marca la acción para eliminar o no
                  *
                  * @param {type} eliminarAccion
-                 * @param {type} tr
                  * @param {type} accion
                  * @returns {undefined}
                  */
-                function eliminarAccionClick(eliminarAccion, tr, accion) {
+                function eliminarAccionClick(eliminarAccion, accion) {
                     eliminarAccion.click(function(e) {
-                        tr.toggleClass('eliminar');
+                        cantidadAcciones.text(parseInt(cantidadAcciones.text()) - 1);
+                        var fila = eliminarAccion.closest('tr');
+                        fila.remove();
 
-                        accionesActualizadas[accion['id']][1] = !accionesActualizadas[accion['id']][1];
+                        var accionesDisponibles = $('#acciones-disponibles');
+                        if (accionesDisponibles.presence())
+                            accionesDisponibles.append('<option value="' + fila.attr('id') + '">' + fila.children('td').first().text() + '</option>');
+
+                        delete accionesActualizadas[accion['id']];
 
                         guardarCambios.empty();
                         guardarCambios.text('Guardar cambios');

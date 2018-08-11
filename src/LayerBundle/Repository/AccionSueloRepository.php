@@ -53,10 +53,10 @@ class AccionSueloRepository extends EntityRepository {
      * @return type
      */
     public function buscarAccionesNoAsociadas($suelo) {
-        $sqb = $this->createQueryBuilder('asociacion_sub');
+        $sqb = $this->createQueryBuilder('asociacion');
 
-        $sqb->select('IDENTITY(asociacion_sub.accion)')
-                ->where($sqb->expr()->eq(':suelo', 'asociacion_sub.suelo'))
+        $sqb->select('IDENTITY(asociacion.accion)')
+                ->where($sqb->expr()->eq(':suelo', 'asociacion.suelo'))
                 ->setParameter('suelo', $suelo)
         ;
 

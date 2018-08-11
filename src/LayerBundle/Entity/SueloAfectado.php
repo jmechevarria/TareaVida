@@ -416,6 +416,7 @@ class SueloAfectado {
      */
     public function __construct() {
         $this->factorLimitante = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->asociacionAccionSuelo = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -1589,36 +1590,6 @@ class SueloAfectado {
      */
     public function getFactorLimitante() {
         return $this->factorLimitante;
-    }
-
-    /**
-     * Add accionDeMejoramiento
-     *
-     * @param \LayerBundle\Entity\AccionDeMejoramiento $accionDeMejoramiento
-     * @return SueloAfectado
-     */
-    public function addAccionDeMejoramiento(\LayerBundle\Entity\AccionDeMejoramiento $accionDeMejoramiento) {
-        $this->accionDeMejoramiento[] = $accionDeMejoramiento;
-
-        return $this;
-    }
-
-    /**
-     * Remove accionDeMejoramiento
-     *
-     * @param \LayerBundle\Entity\AccionDeMejoramiento $accionDeMejoramiento
-     */
-    public function removeAccionDeMejoramiento(\LayerBundle\Entity\AccionDeMejoramiento $accionDeMejoramiento) {
-        $this->accionDeMejoramiento->removeElement($accionDeMejoramiento);
-    }
-
-    /**
-     * Get accionDeMejoramiento
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAccionDeMejoramiento() {
-        return $this->accionDeMejoramiento;
     }
 
     /**
