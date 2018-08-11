@@ -22,8 +22,3 @@ acciondemejoramiento_delete:
     path:     /{id}/delete
     defaults: { _controller: "LayerBundle:AccionDeMejoramiento:delete" }
     methods:  DELETE
-
-acciones_disponibles:
-    path:     /acciones_disponibles/
-    defaults: { _controller: "LayerBundle:AccionDeMejoramiento:accionesDisponibles" }
-    methods:  GET

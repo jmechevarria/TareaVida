@@ -17,7 +17,3 @@ layer_ascensonmm:
 layer_acciondemejoramiento:
     resource: "@LayerBundle/Resources/config/routing/acciondemejoramiento.yml"
     prefix:   /acciondemejoramiento/
-
-layer_accionsuelo:
-    resource: "@LayerBundle/Resources/config/routing/accionsuelo.yml"
-    prefix:   /accionsuelo/
