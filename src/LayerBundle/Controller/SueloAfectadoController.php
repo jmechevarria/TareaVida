@@ -169,31 +169,46 @@ class SueloAfectadoController extends Controller {
         if ($r->isXmlHttpRequest()) {
             $em = $this->getDoctrine()->getManager();
             if ($r->getMethod() === 'POST') {
-                $asociaciones = $em->getRepository('LayerBundle:AccionSuelo')->findBy(array('suelo' => $r->get('suelo')));
+                $suelo_id = $r->get('suelo');
+                $asociaciones = $em->getRepository('LayerBundle:AccionSuelo')->findBy(array('suelo' => $suelo_id));
 
-//            $removed = array();
-                $acciones = $r->get('acciones');
+                $accionesActualizadas = $r->get('acciones');
+
                 foreach ($asociaciones as $a) {
                     $accion_id = $a->getAccion()->getId();
-                    if ($acciones[$accion_id][1] === 'true') {
+                    //si $accion_id se mantiene en las acciones
+                    if (key_exists($accion_id, $accionesActualizadas)) {
+                        if ($accionesActualizadas[$accion_id][0] === 'true')
+                            $a->setHecho(true);
+                        else
+                            $a->setHecho(false);
+                        //se elimina del arreglo de acciones actualizadas para no duplicarla
+                        //cuando se use este arreglo para crear las acciones nuevas
+                        unset($accionesActualizadas[$accion_id]);
+                    } else {//si no, se elimina
                         $em->remove($a);
-//                        var_dump($acciones);
-                        unset($acciones[$accion_id]);
-//                        var_dump($acciones);
-//                        die();
-                    } else if ($acciones[$accion_id][0] === 'true')
-                        $a->setHecho(true);
-                    else
-                        $a->setHecho(false);
+                    }
+                }
+
+                $suelo = $em->getRepository('LayerBundle:SueloAfectado')->find($suelo_id);
+                //las acciones que quedaron en el arreglo de acciones actualizadas se
+                //persisten en la base de datos
+                foreach ($accionesActualizadas as $id => $props) {
+                    $asociacion = new \LayerBundle\Entity\AccionSuelo();
+                    $asociacion->setHecho($props[0]/* true or false */);
+                    $asociacion->setAccion($em->getRepository('LayerBundle:AccionDeMejoramiento')->find($id));
+                    $asociacion->setSuelo($suelo);
+                    $em->persist($asociacion);
                 }
 
                 $em->flush();
 
-                return new \Symfony\Component\HttpFoundation\Response(json_encode($acciones));
+                return new \Symfony\Component\HttpFoundation\Response();
             } else {
-                $acciones = $em->getRepository('LayerBundle:AccionSuelo')->buscarAcciones($r->get('suelo'))->getQuery()->getResult();
+                $accionesAsociadas = $em->getRepository('LayerBundle:AccionSuelo')->buscarAcciones($r->get('suelo'))->getQuery()->getResult();
+                $accionesNoAsociadas = $em->getRepository('LayerBundle:AccionSuelo')->buscarAccionesNoAsociadas($r->get('suelo'))->getQuery()->getResult();
 
-                return new \Symfony\Component\HttpFoundation\Response(json_encode($acciones));
+                return new \Symfony\Component\HttpFoundation\Response(json_encode(array($accionesAsociadas, $accionesNoAsociadas)));
             }
         }
     }
