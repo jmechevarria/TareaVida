@@ -9,6 +9,7 @@
             </div>
             <div id="acciones-accordion-body" class="collapse" aria-labelledby="acciones-accordion-heading" data-parent="#acciones-accordion">
                 <div class="card-body">
+
                     <table id="tabla-acciones" class="table table-hover">
                         <thead>
                             <tr>
@@ -19,16 +20,27 @@
                         </thead>
                         <tbody></tbody>
                     </table>
+                    <div id="nueva-accion-contenedor" class="row no-gutters">
+                        <div class="col-11">
+                            <select id="acciones-disponibles" class="form-control"></select>
+                        </div>
+                        <div class="col-1">
+                            <button id="nueva-accion" class="btn btn-primary">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
                     <div class="row no-gutters opciones">
                         <div class="col-6">
                             <div class="row no-gutters">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <span class="badge" style="color: green;"><i class="fa fa-check-square"></i>Hecho</span>
+                                </div>
+                                <div class="col-4">
                                     <span class="badge"><i class="fa fa-square-o"></i>Por hacer</span>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <span style="color: rgb(213, 36, 36);" class="badge"><i class="fa fa-remove"></i>Eliminar</span> 
-                                    <span style="color: #818181;" class="badge"><i class="fa fa-remove"></i>Mantener</span>
                                 </div>
                             </div>
                         </div>
