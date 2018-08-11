@@ -39,22 +39,32 @@ class AccionSueloRepository extends EntityRepository {
     }
 
     /**
-     * Consulta DQL para actualizar el estado de las acciones correspondientes a una parcela de suelo
+     * Consulta DQL para encontrar las acciones NO asociadas a una parcela de suelo
+     *
+     * SQL equivalente:
+     *
+     * <b>select accion_de_mejoramiento.id from accion_de_mejoramiento
+     * where accion_de_mejoramiento.id not in
+     * (select accion_suelo.accion_id from accion_suelo where suelo_id=<$suelo>)
+     * </b>
      *
      * @param type $suelo
-     * @param type $acciones
+     * @param type $asociadas
      * @return type
      */
-    public function actualizarAcciones($suelo, $acciones) {
-        $qb = $this->createQueryBuilder('asociacion');
-//        $qb->update()->set('hecho', $acciones['hecho']);
-//        foreach ($acciones as $id => $hecho) {
-//            $qb->orWhere($qb->expr()->eq(':accion' . $id, 'accion.id'))
-//                    ->setParameter('accion' . $id, $a);
-//        }
-//        $qb->andWhere($qb->expr()->eq(':suelo', 'suelo.gid'))
-//                ->setParameter('suelo', $suelo);
+    public function buscarAccionesNoAsociadas($suelo) {
+        $sqb = $this->createQueryBuilder('asociacion_sub');
 
+        $sqb->select('IDENTITY(asociacion_sub.accion)')
+                ->where($sqb->expr()->eq(':suelo', 'asociacion_sub.suelo'))
+                ->setParameter('suelo', $suelo)
+        ;
+
+        $qb = $this->getEntityManager()->getRepository('LayerBundle:AccionDeMejoramiento')->createQueryBuilder('accion');
+        $qb->select('accion.id, accion.nombre')
+                ->where($qb->expr()->notIn('accion.id', $sqb->getQuery()->getDQL()))
+                ->setParameter('suelo', $suelo)
+        ;
         return $qb;
     }
 

@@ -195,7 +195,7 @@ class SueloAfectadoController extends Controller {
                 //persisten en la base de datos
                 foreach ($accionesActualizadas as $id => $props) {
                     $asociacion = new \LayerBundle\Entity\AccionSuelo();
-                    $asociacion->setHecho($props[0]/* true or false */);
+                    $asociacion->setHecho($props[0]);
                     $asociacion->setAccion($em->getRepository('LayerBundle:AccionDeMejoramiento')->find($id));
                     $asociacion->setSuelo($suelo);
                     $em->persist($asociacion);
