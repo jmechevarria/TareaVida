@@ -4,18 +4,16 @@
         <div class="card">
             <div class="card-header" id="acciones-accordion-heading">
                 <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#acciones-accordion-body" aria-expanded="false" aria-controls="acciones-accordion-body"></button>
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1"></button>
                 </h5>
             </div>
-            <div {#id="acciones-accordion-body" #}class="collapse" aria-labelledby="acciones-accordion-heading" data-parent="#acciones-accordion">
+            <div id="collapse-1" class="collapse" aria-labelledby="acciones-accordion-heading" data-parent="#acciones-accordion">
                 <div class="card-body">
-
                     <table id="tabla-acciones" class="table table-hover">
                         <thead>
                             <tr>
                                 <th>NOMBRE</th>
                                 <th><i id="marcar-todas" class="fa fa-square-o" data-toggle="tooltip" title="Marcar todas"></i></th>
-                                    {#                                <th><i id="eliminar-todas" class="fa fa-remove" data-toggle="tooltip" title="Eliminar todas"></i></th>#}
                             </tr>
                         </thead>
                         <tbody></tbody>

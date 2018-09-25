@@ -3,7 +3,7 @@
  * @param {type} exports
  * @returns {undefined}
  */
-(function(exports) {
+(function (exports) {
     var interactionsSource = new ol.source.Vector();
     var fragmentsSource = new ol.source.Vector();
     var draw = new ol.interaction.Draw({
@@ -28,7 +28,7 @@
      *
      * @returns {undefined}
      */
-    exports.setupInteractions = function() {
+    exports.setupInteractions = function () {
         setupMenu();
         var interactionsLayer = new ol.layer.Vector({
             name: 'Interactions',
@@ -53,7 +53,7 @@
         var fragmentsLayer = new ol.layer.Vector({
             name: 'Fragments',
             source: fragmentsSource,
-            style: function(feature, resolution) {
+            style: function (feature, resolution) {
                 var style = new ol.style.Style();
                 style.setFill(new ol.style.Fill({
                     color: [255, 0, 0, 1]
@@ -76,7 +76,7 @@
         /**
          * Seleccionar la interacción con el mapa a través del menú vertical derecho #interactions
          */
-        $('#interactions div span').click(function() {
+        $('#interactions div span').click(function () {
             __map.removeInteraction(draw);
             $('[id$="popup-closer"]').click();
             //probar cambiar las dos líneas siguientes por __map.getOverlays().clear();
@@ -99,7 +99,7 @@
         /**
          * Para verificar si el polígono añadido a la capa es válido, si no lo es se elimina
          */
-        __map.getLayerByName('Interactions').getSource().on('addfeature', function(event) {
+        __map.getLayerByName('Interactions').getSource().on('addfeature', function (event) {
             if (event.feature) {
                 var parser = new jsts.io.OL3Parser();
                 var geometry = event.feature.getGeometry();
@@ -116,7 +116,7 @@
      * @returns {undefined}
      */
     function setupMenu() {
-        $('#lock').click(function() {
+        $('#lock').click(function () {
             $('#interactions').toggleClass('unlocked locked');
             $(this).children('i').toggleClass('fa-unlock-alt fa-lock');
         });
@@ -128,13 +128,13 @@
      * @returns {undefined}
      */
     function bindSelectionInteractionEvents() {
-        draw.on('drawstart', function(evt) {
+        draw.on('drawstart', function (evt) {
             if (__map.get('interaction') === 'selection') {
                 __map.getLayerByName('Interactions').getSource().clear(true);
                 __map.getLayerByName('Fragments').getSource().clear(true);
             }
         });
-        draw.on('drawend', function(evt) {
+        draw.on('drawend', function (evt) {
             if (__map.get('interaction') === 'selection') {
                 var parser = new jsts.io.OL3Parser();
                 var geometryDrawn = evt.feature.getGeometry();
@@ -146,10 +146,10 @@
                     var interactionInfoPopupContent = {};
 //                    var union = undefined;
 
-                    __map.getLayers().forEach(function(layer, i, a) {
+                    __map.getLayers().forEach(function (layer, i, a) {
                         if (layer.getVisible()) {
                             if (layer.getSource() instanceof ol.source.Vector) {
-                                $.each(layer.getSource().getFeatures(), function(i, feature) {
+                                $.each(layer.getSource().getFeatures(), function (i, feature) {
                                     var intersection;
                                     var featureGeometryType = feature.getGeometry().getType();
                                     var featureGeometryCoordinates = feature.getGeometry().getCoordinates();
@@ -196,11 +196,10 @@
 
     function bindSingleClickInteractions() {
         var singleClickAjax = undefined;
-        __map.on('singleclick', function(evt) {
+        __map.on('singleclick', function (evt) {
             var coordinate = evt.coordinate;
-
             if (__map.get('interaction') === 'info') {
-                __map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+                __map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
                     if (layer.getType() === 'VECTOR') {
 //                        console.log(layer.get('name'));
                         if (layer && layer.get('name') !== 'Fragments' && layer.get('name') !== 'Interactions'
@@ -217,17 +216,16 @@
                             var newCoordinate = lineIntersect['features'][0]['geometry']['coordinates'];
                             if (newCoordinate)
                                 coordinate = newCoordinate;
-
                             if (singleClickAjax !== undefined)
                                 singleClickAjax.abort();
                             singleClickAjax = setFeatureInfoContent(feature, layer);
-                            $('#feature-info-popup-closer').click(function() {
+                            $('#feature-info-popup-closer').click(function () {
                                 if (singleClickAjax !== undefined)
                                     singleClickAjax.abort();
                                 selectLayers([layer], false);
                                 featureInfoPopup.setPosition(undefined);
                                 this.blur();
-                                $(this).off('click');//sin esta línea, se añade el mismo evento .click varias veces innecesariamente
+                                $(this).off('click'); //sin esta línea, se añade el mismo evento .click varias veces innecesariamente
                                 return false;
                             });
                             featureInfoPopup.setPosition(coordinate);
@@ -241,7 +239,7 @@
             } else if (__map.get('interaction') === 'popup') {
                 var hdms = ol.coordinate.toStringHDMS(coordinate);
                 document.getElementById('coordinates-popup-content').innerHTML = '<p>Coordenadas:</p><code>' + hdms + '</code>';
-                document.getElementById('coordinates-popup-closer').onclick = function() {
+                document.getElementById('coordinates-popup-closer').onclick = function () {
                     coordinatesPopup.setPosition(undefined);
                     this.blur();
                     return false;
@@ -284,7 +282,7 @@
             content.prepend(spinner);
             var intersectionCount = 0, areas = {};
             var suelosIntersectados = [];
-            $.each(__map.getLayerByName('suelo_afectado').getSource().getFeatures(), function(i, f) {
+            $.each(__map.getLayerByName('suelo_afectado').getSource().getFeatures(), function (i, f) {
                 var featureGeometryType = f.getGeometry().getType();
                 var featureGeometryCoordinates = f.getGeometry().getCoordinates();
                 var poly2 = getTurfHelper(featureGeometryType, featureGeometryCoordinates);
@@ -318,7 +316,7 @@
             var sumaAreas = 0;
             var cantAreas = Object.keys(areas).length;
             var iter = 0;
-            $.each(areas, function(i, a) {
+            $.each(areas, function (i, a) {
                 if (iter++ === cantAreas - 1)
                     a = areaParcelaM2 - sumaAreas;
                 var areaHA = Math.floor(a / 100) / 100; //se convierte a hectárea y se muestran 2 lugares decimales
@@ -330,7 +328,6 @@
                 porcientosTipoSuelo.append(colorDiv);
                 sumaAreas += a;
             });
-
             var tipoDeSueloAccordion = $('<div class="accordion" id="tipo-suelo-accordion">');
             var card = $('<div class="card">');
             var cardHeader = $('<div class="card-header" id="tipo-suelo-accordion-heading">');
@@ -340,7 +337,6 @@
             var tipoDeSueloAccordionBody = $('<div id="tipo-suelo-accordion-body" class="collapse" aria-labelledby="tipo-suelo-accordion-heading" data-parent="#tipo-suelo-accordion">');
             var cardBody = $('<div class="card-body">');
             tipoDeSueloAccordion.append(card.append(cardHeader.append(h5.append(button))).append(tipoDeSueloAccordionBody.append(cardBody.append(porcientosTipoSuelo))));
-
             content.append(tipoDeSueloAccordion);
 //            list.after(tipoDeSueloAccordion);
 
@@ -350,10 +346,9 @@
                     poseedor: feature.get('poseedor'),
                     suelos_intersectados: suelosIntersectados
                 }
-            }).done(function(responseData) {
+            }).done((responseData) => {
                 responseData = getJSArray(responseData);
                 list.children('li:first').before('<li>Poseedor: ' + responseData['poseedor'] + '</li>');
-
                 if (responseData['acciones'].length > 0) {
                     var accionesAccordion = $('<div class="accordion" id="acciones-accordion">');
                     var card = $('<div class="card">');
@@ -365,10 +360,9 @@
                     var cardBody = $('<div class="card-body">');
                     var listaAcciones = $('<ul id="lista-acciones" class="list-unstyled">');
                     accionesAccordion.append(card.append(cardHeader.append(h5.append(button))).append(accionesAccordionBody.append(cardBody.append(listaAcciones))));
-
                     content.append(accionesAccordion);
                     button.text('Acciones de mejoramiento del suelo (' + responseData['acciones'].length + ')');
-                    $.each(responseData['acciones'], function(i, accion) {
+                    $.each(responseData['acciones'], function (i, accion) {
                         var li = $('<li>');
                         listaAcciones.append(li
                                 .append('&nbsp;').append(accion['nombre']));
@@ -380,7 +374,6 @@
         } else if (layerName === 'suelo_afectado') {
             //'limpiar' el contenido del popup e insertar una copia del elemento html que se va a utilizar
             content.empty().append($('#parcela-suelo-popup-content').clone().show());
-
             var spinner = $('<label style="color: lightgreen"><i class="fa fa-spinner fa-spin"></i> Obteniendo información, por favor espere...</label>');
             content.prepend(spinner);
             var list = content.find('ul.atributos');
@@ -395,7 +388,7 @@
                 data: {
                     suelo: feature.get('gid')
                 }
-            }).done(function(responseData) {
+            }).done(function (responseData) {
                 responseData = getJSArray(responseData);
                 var accionesAsociadas = responseData[0];
                 var accionesDisponibles = responseData[1];
@@ -407,7 +400,6 @@
                 var tablaAcciones = $('#tabla-acciones');
                 var tbodyAcciones = tablaAcciones.children('tbody');
                 var guardarCambios = content.find('div.opciones button');
-
                 //en esta variable se guardarán los cambios realizados a la lista de acciones para ser actualizados
                 //en la base de datos cuando el usuario presione el botón 'Guardar cambios'
                 var accionesActualizadas = {};
@@ -415,7 +407,7 @@
 //                var acciones = [];
 
                 //recorrer cada acción y conformar el contenido de la tabla
-                $.each(accionesAsociadas, function(i, accion) {
+                $.each(accionesAsociadas, function (i, accion) {
                     //inicializar el objeto con los datos de las acciones
                     //este objeto se actualizará con los cambios realizados por el usuario durante todo el ciclo de vida del popup
                     //para utilizarlo en el momento de guardar
@@ -430,16 +422,13 @@
 
                     checkboxAccionClick(checkboxAccion, accion);
                     eliminarAccionClick(eliminarAccion, accion);
-
                     tbodyAcciones.append(tr
                             .append($('<td>').append(accion['nombre']))
                             .append($('<td>').append(checkboxAccion))
                             .append($('<td>').append(eliminarAccion))
                             );
                 });
-
                 var marcarTodas = $('#marcar-todas');
-
                 //si todas las acciones están hechas
                 if (todasHechas()) {
                     marcarTodas.attr('data-original-title', 'Desmarcar todas');
@@ -447,7 +436,7 @@
                 }
 
                 //evento .click para marcar/desmarcar todas las acciones como hechas
-                marcarTodas.click(function() {
+                marcarTodas.click(function () {
                     marcarTodas.toggleClass('fa-square-o fa-check-square');
                     if (marcarTodas.hasClass('fa-check-square')) {
                         marcarTodas.attr('data-original-title', 'Desmarcar todas');
@@ -457,15 +446,12 @@
                         tablaAcciones.find('tr.accion i.fa-check-square').click();
                     }
                 });
-
                 var accionesDisponiblesSelect = $('#acciones-disponibles');
                 var nuevaAccion = $('#nueva-accion');
-
-                $.each(accionesDisponibles, function(i, accion) {
+                $.each(accionesDisponibles, function (i, accion) {
                     accionesDisponiblesSelect.append('<option value="' + accion['id'] + '">' + accion['nombre'] + '</option>');
                 });
-
-                nuevaAccion.click(function() {
+                nuevaAccion.click(function () {
                     if (accionesDisponiblesSelect.children().length) {
                         var nuevaAccionID = accionesDisponiblesSelect.val();
                         var accionSeleccionada = accionesDisponiblesSelect.children(':selected');
@@ -485,16 +471,14 @@
                         marcarTodas
                                 .removeClass('fa-check-square').addClass('fa-square-o')
                                 .attr('data-original-title', 'Marcar todas');
-
                         guardarCambios.empty();
                         guardarCambios.text('Guardar cambios');
                         guardarCambios.prop('disabled', false);
                         accionesActualizadas[nuevaAccionID] = [false];
                     }
                 });
-
                 //evento .click para actualizar en la base de datos y la vista los cambios realizados
-                guardarCambios.click(function() {
+                guardarCambios.click(function () {
                     guardarCambios.prop('disabled', true);
                     var savingSpinner = $('<i class="fa fa-spinner fa-spin">');
                     guardarCambios.empty();
@@ -507,7 +491,7 @@
                             suelo: feature.get('gid'),
                             acciones: accionesActualizadas
                         }
-                    }).done(function(responseData) {
+                    }).done(function (responseData) {
 //                        acciones eliminadas
 //                        responseData = getJSArray(responseData);
 //                        hechas = $('tr.hecho:not(.eliminar)').length;
@@ -518,8 +502,6 @@
                 $('[data-toggle=tooltip]').tooltip();
                 //quitar spinner
                 spinner.remove();
-
-
                 /**
                  * Evento .click de cada checkbox que marca la acción como hecho o por hacer
                  *
@@ -528,7 +510,7 @@
                  * @returns {undefined}
                  */
                 function checkboxAccionClick(checkboxAccion, accion) {
-                    checkboxAccion.click(function(e) {
+                    checkboxAccion.click(function (e) {
                         $(this).toggleClass('fa-square-o fa-check-square');
                         if ($(this).hasClass('fa-square-o')) {
 //                            hechas--;
@@ -538,13 +520,11 @@
 
                         checkboxAccion.closest('tr').toggleClass('hecho');
                         accionesActualizadas[accion['id']][0] = !accionesActualizadas[accion['id']][0];
-
                         if (e.originalEvent) {
                             if (todasHechas()) {
                                 marcarTodas.attr('data-original-title', 'Desmarcar todas');
                                 marcarTodas.attr('class', 'fa fa-check-square');
-                            }
-                            else {
+                            } else {
                                 marcarTodas.attr('data-original-title', 'Marcar todas');
                                 marcarTodas.attr('class', 'fa fa-square-o');
                             }
@@ -563,17 +543,14 @@
                  * @returns {undefined}
                  */
                 function eliminarAccionClick(eliminarAccion, accion) {
-                    eliminarAccion.click(function(e) {
+                    eliminarAccion.click(function (e) {
                         cantidadAcciones.text(parseInt(cantidadAcciones.text()) - 1);
                         var fila = eliminarAccion.closest('tr');
                         fila.remove();
-
                         var accionesDisponibles = $('#acciones-disponibles');
                         if (accionesDisponibles.presence())
                             accionesDisponibles.append('<option value="' + fila.attr('id') + '">' + fila.children('td').first().text() + '</option>');
-
                         delete accionesActualizadas[accion['id']];
-
                         guardarCambios.empty();
                         guardarCambios.text('Guardar cambios');
                         guardarCambios.prop('disabled', false);
@@ -587,13 +564,12 @@
                  */
                 function todasHechas() {
                     var result = true;
-                    $.each(accionesActualizadas, function(i, accion) {
+                    $.each(accionesActualizadas, function (i, accion) {
                         if (!accion[0]) {
                             result = false;
                             return false;
                         }
                     });
-
                     return result;
                 }
             });

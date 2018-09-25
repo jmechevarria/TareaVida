@@ -9,7 +9,7 @@ var getFeatureURL = 'http://geoservicios.enpa.vcl.minag.cu/geoserver/wfs?service
 var __WMSCapabilities;
 //grupos de capas obtenidos del servidor
 var __Layers = {};
-$(document).ready(function() {
+$(document).ready(function () {
     runAsynchronousCalls();
 });
 /**
@@ -22,7 +22,7 @@ function runAsynchronousCalls() {
     getWMSCapabilities();
     getLayersMetadata(layers_metadata);
     //esperar a las llamadas ajax de 'getWMSCapabilities' y 'getLayers' para comenzar la construcción del mapa
-    $(document).one('ajaxStop', function() {
+    $(document).one('ajaxStop', function () {
         setupMainInterface();
     });
 }
@@ -42,18 +42,16 @@ function getWMSCapabilities() {
 
     $.ajax({
         url: capabilitiesURL,
-//        beforeSend: function(xhr) {
-//            xhr.overrideMimeType("application/json; charset=UTF-8");
-//        }
-    }).done(function(responseText) {
+    }).done(function (responseText) {
         __WMSCapabilities = responseText;
-    }).fail(function() {
+    }).fail(function () {
         this.url = 'http://localhost:8080/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities';
-        $.ajax(this).done(function(responseText) {
+        $.ajax(this).done(function (responseText) {
             __WMSCapabilities = responseText;
         });
     });
 }
+
 /**
  * Guardar los metadatos de las capas en la variable
  * global <b>__Layers</b>.
@@ -64,12 +62,12 @@ function getWMSCapabilities() {
 function getLayersMetadata() {
     $.ajax({
         url: layers_metadata
-    }).done(function(data) {
-        data = getJSObject(data);
-        $.each(data, function(group, arr) {
+    }).done(function (data) {
+        data = getJSArray(data);
+        $.each(data, function (group, arr) {
             __Layers[group] = arr;
         });
-    }).fail(function() {
+    }).fail(function () {
         console.log('Ocurrió un error obteniendo los metadatos de las capas', 'Url: ' + layers_metadata);
     });
 }

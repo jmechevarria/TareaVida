@@ -85,7 +85,7 @@ $(document).ready(function() {
     });
 });
 
-function getJSObject(value) {
+function getJSArray(value) {
     return $.parseJSON(value.replace(/&quot;/ig, '"'));
 }
 

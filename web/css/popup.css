@@ -61,12 +61,13 @@
 }
 
 #feature-info-popup-content{
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: -ms-max-content;
-    width: -o-max-content;
-    width: max-content;
-    max-width: 400px;
+    /*    width: -webkit-max-content;
+        width: -moz-max-content;
+        width: -ms-max-content;
+        width: -o-max-content;
+        width: max-content;
+        max-width: 550px;*/
+    width: 450px
 }
 
 /*GRÁFICA DE COLORES DE TIPOS DE SUELO*/
@@ -100,10 +101,6 @@
 }
 /*GRÁFICA DE COLORES DE TIPOS DE SUELO - FIN*/
 
-#feature-info-popup-content div.collapse, #feature-info-popup-content div.collapsing{
-    color: black
-}
-
 /*ACCORDION*/
 #feature-info-popup-content div.card-header{
     padding: 0;
@@ -111,8 +108,14 @@
 }
 
 #feature-info-popup-content div.card-body{
+    min-height: 100%;
     padding: .5rem;
     background: rgb(218, 218, 218);
+}
+
+#feature-info-popup-content #collapse-1.collapse,
+#feature-info-popup-content #collapse-1.collapsing{
+    color: black
 }
 
 #feature-info-popup-content div.card-header button.btn-link{
@@ -126,37 +129,46 @@
 }
 /*ACCORDION - FIN*/
 
-/*ACCIONES ACCORDION*/
-#feature-info-popup-content div.accordion div.opciones{
-    /*display: none;*/
+/*#parcela-suelo-popup-content*/
+#parcela-suelo-popup-content div.accordion div.opciones{
     border-top: 2px solid rgb(99, 36, 36);
 }
 
-#feature-info-popup-content div.accordion div.opciones i.fa{
+#parcela-suelo-popup-content i.fa{
     width: 12px
 }
 
-#feature-info-popup-content #tabla-acciones tr.hecho{
+#parcela-suelo-popup-content #tabla-acciones tr.hecho{
     color: green;
     text-decoration-line: line-through;
 }
 
-#feature-info-popup-content #tabla-acciones tr.eliminar td:first-child{
-    color: rgb(213, 36, 36);
-    text-decoration-line: line-through;
-}
-
-#feature-info-popup-content #tabla-acciones i.fa{
+#parcela-suelo-popup-content #tabla-acciones i.fa{
     cursor: default;
     text-align: center
 }
 
-#feature-info-popup-content #tabla-acciones i.fa-remove{
-    color: #818181
+#parcela-suelo-popup-content #tabla-acciones i.fa-remove{
+    color: rgb(213, 36, 36);
 }
 
-#feature-info-popup-content #tabla-acciones tr.eliminar i.fa-remove{
-    color: rgb(213, 36, 36)
+#parcela-suelo-popup-content div.collapse ,
+#parcela-suelo-popup-content div.collapsing {
+    max-height: 250px;
+    overflow-y: auto
 }
-/*ACCIONES ACCORDION - FIN*/
 
+#parcela-suelo-popup-content #acciones-disponibles {
+    padding: 0rem .75rem;
+    height: 1.8rem;
+}
+
+#parcela-suelo-popup-content div#nueva-accion-contenedor {
+    background: lightblue;
+    padding: 5px;
+}
+
+#parcela-suelo-popup-content #nueva-accion{
+    padding: 0 10px
+}
+/*#parcela-suelo-popup-content - FIN*/
